@@ -1,0 +1,218 @@
+.heroContainer {
+  position: relative;
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-20);
+  background: radial-gradient(circle at 50% 15%, rgba(252, 189, 0, 0.08) 0%, #ffffff 70%);
+  overflow: hidden;
+  color: var(--color-dark);
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.announcementPill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-pill);
+  background: rgba(252, 151, 0, 0.1);
+  border: 1px solid rgba(252, 151, 0, 0.3);
+  color: #d97706;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: var(--space-6);
+}
+
+.sparkleIcon {
+  color: var(--accent-orange);
+}
+
+.closePillBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-muted);
+  padding: 2px;
+  margin-left: var(--space-2);
+  border-radius: 50%;
+  transition: color 0.2s ease;
+}
+
+.closePillBtn:hover {
+  color: var(--color-dark);
+}
+
+.introBadge {
+  margin-bottom: var(--space-4);
+}
+
+.mainHeadline {
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--color-dark);
+  max-width: 960px;
+  margin-bottom: var(--space-6);
+  letter-spacing: -0.02em;
+}
+
+.subHeadline {
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  color: #4b5563;
+  max-width: 780px;
+  margin-bottom: var(--space-8);
+  line-height: 1.6;
+}
+
+.ctaGroup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-12);
+}
+
+.trustBadgesRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  margin-bottom: var(--space-16);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-dark);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.featuresGrid {
+  width: 100%;
+  margin-bottom: var(--space-20);
+}
+
+.featureCard {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  height: 100%;
+  background-color: var(--color-light);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.featureCard:hover {
+  border-color: rgba(252, 189, 0, 0.5);
+  box-shadow: var(--shadow-md);
+}
+
+.featureCard h3 {
+  font-size: 1.25rem;
+  color: var(--color-dark);
+}
+
+.featureCard p {
+  font-size: 0.95rem;
+  color: var(--color-muted);
+}
+
+.featureIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: rgba(252, 151, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-8);
+  width: 100%;
+  max-width: 1000px;
+  padding: var(--space-8);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-16);
+}
+
+@media (min-width: 768px) {
+  .statsRow {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.statBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statNumber {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 800;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--space-1);
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+.socialProofSection {
+  width: 100%;
+  margin-bottom: var(--space-12);
+}
+
+.socialProofLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+  margin-bottom: var(--space-6);
+}
+
+.partnerName {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--color-dark);
+  opacity: 0.75;
+}
+
+.scrollIndicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+}

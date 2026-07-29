@@ -1,0 +1,75 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.sm {
+  padding: 0.4rem 0.85rem;
+  font-size: 0.875rem;
+}
+
+.md {
+  padding: 0.65rem 1.35rem;
+  font-size: 1rem;
+}
+
+.lg {
+  padding: 0.85rem 1.85rem;
+  font-size: 1.125rem;
+}
+
+.primary {
+  background: var(--gradient-primary);
+  color: #1a1e24;
+  border: 1px solid transparent;
+  box-shadow: 0 4px 14px rgba(252, 151, 0, 0.25);
+}
+
+.primary:hover {
+  background: var(--gradient-primary-hover);
+  box-shadow: 0 6px 20px rgba(252, 189, 0, 0.4);
+}
+
+.secondary {
+  background: var(--color-dark);
+  color: var(--color-light);
+  border: 1px solid var(--color-border-dark);
+}
+
+.secondary:hover {
+  background: #3b4250;
+  border-color: var(--accent-gold);
+}
+
+.outline {
+  background: transparent;
+  color: var(--color-dark);
+  border: 1px solid var(--color-border);
+}
+
+.outline:hover {
+  border-color: var(--accent-gold);
+  background: rgba(252, 189, 0, 0.08);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--color-dark);
+  border: 1px solid transparent;
+}
+
+.ghost:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+}

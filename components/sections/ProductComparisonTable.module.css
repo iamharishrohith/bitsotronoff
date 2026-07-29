@@ -1,0 +1,147 @@
+.comparisonWrapper {
+  width: 100%;
+  margin: var(--space-8) 0;
+}
+
+.tableContainer {
+  display: none;
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  background: var(--color-light);
+}
+
+@media (min-width: 768px) {
+  .tableContainer {
+    display: block;
+  }
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.featureHeader {
+  padding: var(--space-6);
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: var(--color-surface);
+  color: var(--color-dark);
+  border-bottom: 2px solid var(--color-border);
+  width: 35%;
+}
+
+.productHeader {
+  padding: var(--space-6);
+  text-align: center;
+  background: var(--color-surface);
+  border-bottom: 2px solid var(--color-border);
+  width: 21.6%;
+}
+
+.headerTitle {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-dark);
+}
+
+.headerTag {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+
+.evenRow {
+  background-color: rgba(0, 0, 0, 0.015);
+}
+
+.featureCell {
+  padding: var(--space-4) var(--space-6);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-dark);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.valueCell {
+  padding: var(--space-4) var(--space-6);
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--color-muted);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.checkIcon {
+  color: #16a34a;
+}
+
+.crossIcon {
+  color: #dc2626;
+  opacity: 0.4;
+}
+
+/* Mobile Stacked Cards */
+.mobileCardsView {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .mobileCardsView {
+    display: none;
+  }
+}
+
+.mobileCard {
+  background: var(--color-light);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+}
+
+.mobileCardHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 2px solid var(--gradient-primary);
+}
+
+.mobileCardHeader h3 {
+  font-size: 1.25rem;
+}
+
+.mobileSpecsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.mobileSpecItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-surface);
+}
+
+.mobileSpecLabel {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-muted);
+}
+
+.mobileSpecVal {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-dark);
+}

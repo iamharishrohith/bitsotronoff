@@ -1,0 +1,137 @@
+/* CSS Reset & Global Brand Design Tokens for BITSOTRON - Grey Family Theme */
+:root {
+  /* Brand Color Tokens - Refined Grey Family Palette */
+  --color-dark: #2d323b;               /* Deep Slate Charcoal Grey */
+  --color-dark-90: rgba(45, 50, 59, 0.9);
+  --color-dark-80: rgba(45, 50, 59, 0.8);
+  --color-dark-surface: #22262f;       /* Dark Surface Grey */
+  --color-dark-card: #373e4a;          /* Elevating Card Grey */
+  
+  --gradient-primary: linear-gradient(90deg, #FC9700 0%, #FCBD00 100%);
+  --gradient-primary-hover: linear-gradient(90deg, #e58700 0%, #ebae00 100%);
+  --gradient-glow: linear-gradient(90deg, rgba(252, 151, 0, 0.25) 0%, rgba(252, 189, 0, 0.25) 100%);
+
+  /* Supporting Grey Tones */
+  --color-light: #ffffff;
+  --color-surface: #f4f6f8;            /* Soft Slate Light Grey Surface */
+  --color-surface-subtle: #f8fafc;     /* Clean Off-White Grey */
+  --color-muted: #64748b;              /* Muted Slate Text Grey */
+  --color-border: #e2e8f0;             /* Border Light Grey */
+  --color-border-dark: #3f4756;        /* Border Dark Slate Grey */
+  
+  --accent-gold: #FCBD00;
+  --accent-orange: #FC9700;
+
+  /* Typography Scale */
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-family-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing Scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-pill: 9999px;
+
+  /* Shadows & Glassmorphism */
+  --shadow-sm: 0 2px 4px rgba(45, 50, 59, 0.05);
+  --shadow-md: 0 4px 12px rgba(45, 50, 59, 0.08);
+  --shadow-lg: 0 12px 32px rgba(45, 50, 59, 0.12);
+  --shadow-gold: 0 8px 24px rgba(252, 151, 0, 0.2);
+
+  --backdrop-blur: blur(12px);
+
+  /* Container Max Width */
+  --container-max-width: 1240px;
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family-base);
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Typography Defaults */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-display);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-dark);
+}
+
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(2rem, 3.5vw, 2.75rem); letter-spacing: -0.01em; }
+h3 { font-size: clamp(1.35rem, 2.5vw, 1.75rem); }
+h4 { font-size: 1.25rem; }
+
+p {
+  color: var(--color-muted);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Utility Gradient Text */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+/* Accessibility: prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

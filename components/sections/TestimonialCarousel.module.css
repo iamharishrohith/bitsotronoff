@@ -1,0 +1,90 @@
+.carouselContainer {
+  position: relative;
+  max-width: 800px;
+  margin: var(--space-8) auto;
+  width: 100%;
+}
+
+.testimonialCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-12) var(--space-8);
+  border-radius: var(--radius-xl);
+}
+
+.quoteIcon {
+  opacity: 0.3;
+  margin-bottom: var(--space-4);
+}
+
+.quoteText {
+  font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--color-light);
+  margin-bottom: var(--space-6);
+  max-width: 680px;
+}
+
+.ratingRow {
+  display: flex;
+  gap: var(--space-1);
+  margin-bottom: var(--space-4);
+}
+
+.authorMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.authorName {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-light);
+}
+
+.authorRole {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.companyName {
+  color: var(--accent-gold);
+  font-weight: 600;
+}
+
+.controlsRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+}
+
+.controlBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-light);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.controlBtn:hover {
+  background: var(--gradient-primary);
+  color: var(--color-dark);
+  border-color: transparent;
+}
+
+.pageCounter {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  font-weight: 600;
+}

@@ -1,0 +1,151 @@
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--color-dark);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.scrolled {
+  background-color: rgba(38, 38, 38, 0.92);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border-bottom-color: rgba(252, 189, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.navContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.logoImage {
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
+.logoText {
+  font-family: var(--font-family-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  color: var(--color-light);
+}
+
+.desktopNav {
+  display: none;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+@media (min-width: 992px) {
+  .desktopNav {
+    display: flex;
+  }
+}
+
+.navLink {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  position: relative;
+  padding: 0.35rem 0;
+}
+
+.navLink:hover {
+  color: var(--color-light);
+}
+
+.active {
+  color: var(--accent-gold) !important;
+  font-weight: 600;
+}
+
+.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  border-radius: 2px;
+}
+
+.desktopCta {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .desktopCta {
+    display: block;
+  }
+}
+
+.hamburgerBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+}
+
+@media (min-width: 992px) {
+  .hamburgerBtn {
+    display: none;
+  }
+}
+
+.mobileDrawer {
+  background-color: var(--color-dark);
+  border-bottom: 1px solid var(--color-border-dark);
+  overflow: hidden;
+}
+
+.mobileContent {
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-6);
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.mobileNavLink {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mobileActive {
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.mobileCtaWrapper {
+  margin-top: var(--space-4);
+}

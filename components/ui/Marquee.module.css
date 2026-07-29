@@ -1,0 +1,40 @@
+.marqueeContainer {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.marqueeTrack {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  width: max-content;
+  animation: scrollMarquee 25s linear infinite;
+}
+
+.marqueeContainer:hover .marqueeTrack {
+  animation-play-state: paused;
+}
+
+.marqueeItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+
+.marqueeItem:hover {
+  opacity: 1;
+}
+
+@keyframes scrollMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

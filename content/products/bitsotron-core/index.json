@@ -1,0 +1,7 @@
+{
+  "title": "BITSOTRON Core Platform",
+  "category": "ai",
+  "tagline": "Real-time Autonomous Decision Engine",
+  "summary": "High-speed distributed neural runtime capable of evaluating sub-millisecond sensor telemetry and executing deterministic control workflows.",
+  "icon": "Cpu"
+}
