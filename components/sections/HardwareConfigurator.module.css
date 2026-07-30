@@ -4,6 +4,52 @@
   gap: var(--space-6);
 }
 
+/* Offer Callout Banner */
+.offerBanner {
+  background: linear-gradient(135deg, rgba(252, 151, 0, 0.08), rgba(252, 189, 0, 0.04));
+  border: 1.5px dashed #FC9700;
+  border-radius: var(--radius-xl);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+  margin-bottom: var(--space-2);
+}
+
+.offerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.offerBadge {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #FC9700;
+  letter-spacing: 0.05em;
+}
+
+.discountBadge {
+  background: #FC9700;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.25rem 0.55rem;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+}
+
+.offerText {
+  font-size: 0.95rem;
+  color: var(--color-dark);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Scrollable Table Wrapper */
 .scrollWrapper {
   width: 100%;
   overflow-x: auto;
@@ -16,7 +62,7 @@
 
 .pricingTable {
   width: 100%;
-  min-width: 800px;
+  min-width: 900px;
   border-collapse: collapse;
   text-align: left;
 }
