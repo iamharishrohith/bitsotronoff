@@ -2,98 +2,123 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, Check, Copy, Mail, RefreshCw, Cpu, Database, Shield, Zap, BookOpen, HeartPulse, Store, Wrench, Settings, Battery } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Copy, Mail, RefreshCw, Cpu, Database, Shield, Zap, BookOpen, HeartPulse, Store, Wrench, Settings, Battery, Users, ShieldAlert, Layers } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import styles from './page.module.css';
 
-// Specification details
-const BASE_MODELS = [
-  { id: 'software', name: 'BITSOTRON Core (Software Only)', price: 0, desc: 'Enterprise micro-kernel OS license for user-provided boards.' },
-  { id: 'edge-s1', name: 'BITSOTRON Edge S1 (Rugged Mini)', price: 23999, originalPrice: 39999, desc: 'Rugged portable mini-node for remote environments.' },
-  { id: 'edge-x5', name: 'BITSOTRON Edge X5 (Enterprise)', price: 71999, originalPrice: 119999, desc: 'High-performance pole-mount or server rack system.' }
+// Configurator options aligned with pricing rules docs
+const USE_CASES = [
+  { id: 'case-edu', name: 'Education & Classroom', desc: 'Distribute offline textbooks, lessons, videos, and local quiz tools.' },
+  { id: 'case-ngo', name: 'NGO & Rural Community', desc: 'Deploy offline health documentation, community forms, and guides.' },
+  { id: 'case-disaster', name: 'Disaster & Emergency Response', desc: 'Provide maps, contact logs, protocols, and coordination tools.' },
+  { id: 'case-media', name: 'Photography & Creative Media', desc: 'Fast local media backup, data transfers, and creator group access.' },
+  { id: 'case-field', name: 'Field Engineering & Construction', desc: 'Host offline blueprints, manuals, checklists, and sensor APIs.' },
+  { id: 'case-business', name: 'Small Business / Shop', desc: 'Local employee files sharing, event brochures, and basic NAS.' },
+  { id: 'case-fleet', name: 'Enterprise Fleet (Large Teams)', desc: 'Multi-device deployments, centralized sync, and secure portals.' }
 ];
 
-const PROCESSORS = [
-  { id: 'arm64', name: 'ARM64 Cortex Quad-Core', price: 0, desc: 'Default low-thermal processor. Fits standard telemetry operations.' },
-  { id: 'x86_64', name: 'x86_64 Intel Atom Industrial', price: 12000, desc: 'Medium-tier industrial processor for heavy database lookups.' },
-  { id: 'fpga', name: 'FPGA Co-processor (Custom DSP)', price: 36000, desc: 'High-speed hardware acceleration for real-time sensor streams.' }
+const USER_COUNTS = [
+  { id: 'users-small', name: '1 to 5 Users', price: 0, desc: 'Ideal for small prototype testing, single classrooms, or solo creators.' },
+  { id: 'users-med', name: '6 to 20 Users', price: 6000, desc: 'Designed for average field teams or school computer lab benches.' },
+  { id: 'users-large', name: '21 to 50 Users', price: 12000, desc: 'Engineered for dense rural communities or complete office teams.' },
+  { id: 'users-xl', name: '51 to 100 Users', price: 24000, desc: 'High-density client bandwidth allocation and priority queue management.' },
+  { id: 'users-enterprise', name: '100+ Users', price: 48000, desc: 'Enterprise scaling requiring custom multi-node mesh networking.' }
 ];
 
 const STORAGE_OPTIONS = [
-  { id: 'ssd-256', name: '256GB Enterprise NVMe SSD', price: 0, desc: 'Standard space tier for system configurations and telemetry logs.' },
-  { id: 'ssd-1tb', name: '1TB Enterprise NVMe SSD', price: 9999, desc: 'Expanded storage tier for offline media assets and libraries.' },
-  { id: 'ssd-2tb', name: '2TB Enterprise NVMe SSD', price: 19999, desc: 'Maximum storage tier for extensive industrial telemetry logging.' }
+  { id: 'ssd-64', name: '64GB High-Endurance microSD', price: 0, desc: 'Standard planning configuration for text documents, code, and guides.' },
+  { id: 'ssd-256', name: '256GB Enterprise NVMe SSD', price: 4000, desc: 'Recommended storage tier for images, manuals, and templates.' },
+  { id: 'ssd-512', name: '512GB Enterprise NVMe SSD', price: 8000, desc: 'Suitable for high-density local files and small media galleries.' },
+  { id: 'ssd-1tb', name: '1TB Enterprise NVMe SSD', price: 16000, desc: 'Designed for video libraries, large maps, and field datasets.' }
 ];
 
-const SECTOR_CRATES = [
-  { id: 'none', name: 'No Sector Crate (Vanilla OS)', price: 0, desc: 'Pure operating system runtime with no preloaded sector content.' },
-  { id: 'crate-edu', name: 'Education Offline Crate', price: 8000, desc: 'Preloaded offline video courses, textbooks, and quiz runtime.' },
-  { id: 'crate-health', name: 'Healthcare Offline Crate', price: 10000, desc: 'Preloaded clinical manuals, diagnostic tools, and chart logs.' },
-  { id: 'crate-retail', name: 'Retail & Events Crate', price: 7000, desc: 'Preloaded offline catalog managers, templates, and registration.' },
-  { id: 'crate-industry', name: 'Industry & Field Crate', price: 12000, desc: 'Preloaded safety guides, checklist libraries, and ROS2 drivers.' }
+const RUNTIMES = [
+  { id: 'run-desk', name: 'Desk Powered (Basic)', price: 0, desc: 'Requires stable external USB-C power input. Ideal for classroom tables.' },
+  { id: 'run-short', name: '2 to 4 Hours Backup battery', price: 6000, desc: 'Safety power backup shielding against brief blackouts.' },
+  { id: 'run-med', name: '4 to 8 Hours (Extended battery)', price: 12000, desc: 'Li-FePO4 battery pack for full-day portable operations in the field.' },
+  { id: 'run-max', name: '8+ Hours (Maximum battery)', price: 20000, desc: 'Double cell battery stack for off-grid operations and emergency response.' }
+];
+
+const SECURITY_LEVELS = [
+  { id: 'sec-basic', name: 'Basic Local Login', price: 0, desc: 'Standard password protection for local network administration.' },
+  { id: 'sec-role', name: 'Role-Based Team Access', price: 5000, desc: 'Enforces user accounts, group permissions, and local audit logs.' },
+  { id: 'sec-encrypt', name: 'Encrypted Storage Partition', price: 9000, desc: 'Full disk AES-256 encryption protecting physical data theft.' },
+  { id: 'sec-enterprise', name: 'Enterprise Security Policies', price: 18000, desc: 'Integrates local Active Directory, certificate checks, and HSM keys.' }
 ];
 
 const SERVICES = [
-  { id: 'none', name: 'Standard Self-Managed SLA', price: 0, desc: 'Access to standard support tickets and open developer docs.' },
-  { id: 'service-seed', name: 'Offline Data Seeding Service', price: 12000, desc: 'We preload and flash your corporate dataset onto the SSD before shipping.' },
-  { id: 'service-sla', name: '24/7 Priority SLA Support', price: 24000, desc: 'Guaranteed 1-hour ticket response times from edge systems engineers.' },
-  { id: 'service-compile', name: 'Custom Kernel Compile Service', price: 48000, desc: 'Bespoke micro-kernel compiler adjustments for proprietary ASIC/FPGA boards.' }
-];
-
-const UPGRADES = [
-  { id: 'up-ip67', name: 'IP67 Waterproof Outdoor Case', price: 14999, desc: 'Waterproof, dustproof, and shockproof protective outer shielding.' },
-  { id: 'up-battery', name: 'Li-FePO4 Battery Expansion Pack', price: 11000, desc: 'Add-on module yielding up to 8 hours of off-grid field operations.' },
-  { id: 'up-hsm', name: 'HSM Cryptographic Secure Chip', price: 24000, desc: 'Air-gapped security enclave co-processor with post-quantum key.' }
+  { id: 'srv-share', name: 'Offline File Sharing & Wiki', price: 0, desc: 'Default tools for uploading, downloading, and hosting wiki documents.' },
+  { id: 'srv-chat', name: 'Local Chat & Collaboration', price: 4500, desc: 'Browser-based message board and note sharing for connected clients.' },
+  { id: 'srv-dev', name: 'Developer Tools (Git, VS Code)', price: 8500, desc: 'Local Git servers, browser coding sandbox, and container environments.' },
+  { id: 'srv-ai', name: 'Edge AI & Inference Modules', price: 16000, desc: 'Hardware-accelerated local search, OCR engine, and assistant runtime.' },
+  { id: 'srv-iot', name: 'IoT MQTT Sensor Dashboard', price: 12500, desc: 'Broker and telemetry visuals to monitor local sensors in real-time.' }
 ];
 
 const STEPS = [
-  { name: '1. Base Frame', key: 'base' },
-  { name: '2. Processor', key: 'cpu' },
-  { name: '3. Storage', key: 'storage' },
-  { name: '4. Sector Crate', key: 'crate' },
-  { name: '5. Services', key: 'service' },
-  { name: '6. Upgrades', key: 'upgrades' }
+  { name: '1. Use Case', key: 'usecase' },
+  { name: '2. Users Count', key: 'users' },
+  { name: '3. Storage Needs', key: 'storage' },
+  { name: '4. Battery Life', key: 'runtime' },
+  { name: '5. Security', key: 'security' },
+  { name: '6. Services', key: 'services' }
 ];
 
 export default function MDCBuildingPage() {
   const [activeStep, setActiveStep] = useState(0);
 
   // Selections state
-  const [selectedBase, setSelectedBase] = useState('software');
-  const [selectedCpu, setSelectedCpu] = useState('arm64');
-  const [selectedStorage, setSelectedStorage] = useState('ssd-256');
-  const [selectedCrate, setSelectedCrate] = useState('none');
-  const [selectedService, setSelectedService] = useState('none');
-  const [selectedUpgrades, setSelectedUpgrades] = useState<string[]>([]);
+  const [selectedCase, setSelectedCase] = useState('case-edu');
+  const [selectedUsers, setSelectedUsers] = useState('users-small');
+  const [selectedStorage, setSelectedStorage] = useState('ssd-64');
+  const [selectedRuntime, setSelectedRuntime] = useState('run-desk');
+  const [selectedSecurity, setSelectedSecurity] = useState('sec-basic');
+  const [selectedService, setSelectedService] = useState('srv-share');
   const [copied, setCopied] = useState(false);
 
-  // Find objects helper
-  const baseObj = BASE_MODELS.find(x => x.id === selectedBase) || BASE_MODELS[0];
-  const cpuObj = PROCESSORS.find(x => x.id === selectedCpu) || PROCESSORS[0];
+  // Retrieve objects
+  const caseObj = USE_CASES.find(x => x.id === selectedCase) || USE_CASES[0];
+  const usersObj = USER_COUNTS.find(x => x.id === selectedUsers) || USER_COUNTS[0];
   const storageObj = STORAGE_OPTIONS.find(x => x.id === selectedStorage) || STORAGE_OPTIONS[0];
-  const crateObj = SECTOR_CRATES.find(x => x.id === selectedCrate) || SECTOR_CRATES[0];
+  const runtimeObj = RUNTIMES.find(x => x.id === selectedRuntime) || RUNTIMES[0];
+  const securityObj = SECURITY_LEVELS.find(x => x.id === selectedSecurity) || SECURITY_LEVELS[0];
   const serviceObj = SERVICES.find(x => x.id === selectedService) || SERVICES[0];
-  const activeUpgrades = UPGRADES.filter(x => selectedUpgrades.includes(x.id));
 
-  // Pricing math
-  const subtotal = baseObj.price + cpuObj.price + storageObj.price + crateObj.price + serviceObj.price + activeUpgrades.reduce((sum, x) => sum + x.price, 0);
-  
-  // Total original price math for launch offer showcase
-  const originalSubtotal = (baseObj.originalPrice || baseObj.price) + cpuObj.price + storageObj.price + crateObj.price + serviceObj.price + activeUpgrades.reduce((sum, x) => sum + x.price, 0);
-  const totalSavings = originalSubtotal - subtotal;
+  // Dynamic recommendation logic based on docs/29-product-configurator-pricing-rules.md
+  let recommendedEdition = 'Prototype / Pilot Edition';
+  let basePrice = 11999; // originally 19999 (40% off)
+  let originalBasePrice = 19999;
+  let editionCode = 'PROTO';
 
-  // Build ID string format: e.g. BITSO-MDC-EDGE-S1-FPGA-SSD-2TB-CRATE-HEALTH-SERVICE-SEED-IP67
-  const upgradeStr = selectedUpgrades.length > 0 ? selectedUpgrades.map(u => u.replace('up-', '').toUpperCase()).join('-') : 'NONE';
-  const configCode = `BITSO-MDC-${selectedBase.toUpperCase()}-${selectedCpu.toUpperCase()}-${selectedStorage.toUpperCase()}-${selectedCrate.replace('crate-', '').toUpperCase()}-${selectedService.replace('service-', '').toUpperCase()}-${upgradeStr}`;
+  const isEnterprise = selectedCase === 'case-fleet' || selectedUsers === 'users-enterprise' || selectedSecurity === 'sec-enterprise';
+  const isField = selectedCase === 'case-disaster' || selectedCase === 'case-field' || selectedCase === 'case-media' || selectedRuntime === 'run-med' || selectedRuntime === 'run-max';
+  const isEdu = selectedCase === 'case-edu' || selectedCase === 'case-ngo';
 
-  // Toggle upgrades selection
-  const handleToggleUpgrade = (id: string) => {
-    if (selectedUpgrades.includes(id)) {
-      setSelectedUpgrades(selectedUpgrades.filter(x => x !== id));
-    } else {
-      setSelectedUpgrades([...selectedUpgrades, id]);
-    }
-  };
+  if (isEnterprise) {
+    recommendedEdition = 'Pro / Enterprise Edition';
+    basePrice = 0; // Quote based
+    originalBasePrice = 0;
+    editionCode = 'PRO-ENT';
+  } else if (isField) {
+    recommendedEdition = 'Field Edition';
+    basePrice = 35999; // originally 59999 (40% off)
+    originalBasePrice = 59999;
+    editionCode = 'FIELD';
+  } else if (isEdu) {
+    recommendedEdition = 'Education / Basic Edition';
+    basePrice = 17999; // originally 29999 (40% off)
+    originalBasePrice = 29999;
+    editionCode = 'BASIC';
+  }
+
+  // Pricing calculations
+  const addOnsTotal = usersObj.price + storageObj.price + runtimeObj.price + securityObj.price + serviceObj.price;
+  const isQuoteBased = recommendedEdition === 'Pro / Enterprise Edition';
+  const subtotal = isQuoteBased ? 0 : basePrice + addOnsTotal;
+  const originalSubtotal = isQuoteBased ? 0 : originalBasePrice + addOnsTotal;
+  const totalSavings = isQuoteBased ? 0 : originalSubtotal - subtotal;
+
+  // Configuration ID string
+  const configCode = `BITSO-MDC-${editionCode}-${selectedUsers.replace('users-', '').toUpperCase()}-${selectedStorage.replace('ssd-', '').toUpperCase()}-${selectedRuntime.replace('run-', '').toUpperCase()}-${selectedSecurity.replace('sec-', '').toUpperCase()}-${selectedService.replace('srv-', '').toUpperCase()}`;
 
   const handleCopyCode = () => {
     navigator.clipboard.writeText(configCode);
@@ -102,18 +127,18 @@ export default function MDCBuildingPage() {
   };
 
   const handleReset = () => {
-    setSelectedBase('software');
-    setSelectedCpu('arm64');
-    setSelectedStorage('ssd-256');
-    setSelectedCrate('none');
-    setSelectedService('none');
-    setSelectedUpgrades([]);
+    setSelectedCase('case-edu');
+    setSelectedUsers('users-small');
+    setSelectedStorage('ssd-64');
+    setSelectedRuntime('run-desk');
+    setSelectedSecurity('sec-basic');
+    setSelectedService('srv-share');
     setActiveStep(0);
   };
 
   // Precomposed email body
   const mailSubject = `BITSOTRON MDC Custom Build Pre-Book Request (${configCode})`;
-  const mailBody = `Hello BITSOTRON Sales,%0D%0A%0D%0AI would like to pre-book a customized BITSOTRON micro-compute system using the interactive MDC builder tool:%0D%0A%0D%0AConfiguration Specifications:%0D%0A- Configuration Code: ${configCode}%0D%0A- Base Platform Model: ${baseObj.name}%0D%0A- Processor Module: ${cpuObj.name}%0D%0A- Storage Option: ${storageObj.name}%0D%0A- Sector Offline Crate: ${crateObj.name}%0D%0A- Custom Support/Services: ${serviceObj.name}%0D%0A- Upgrades Added: ${activeUpgrades.map(u => u.name).join(', ') || 'None'}%0D%0A%0D%0AEstimated Ex-Works Price: ₹${subtotal.toLocaleString('en-IN')}%0D%0A(Pre-book package includes lifetime free BITSOTRON Core license and 40% discount on edge hardware)%0D%0A%0D%0APlease contact me to finalize this configuration and outline billing steps.%0D%0A%0D%0ARegards,%0D%0A[Name]%0D%0A[Phone Number]`;
+  const mailBody = `Hello BITSOTRON Sales,%0D%0A%0D%0AI would like to pre-book a customized BITSOTRON Mini Data Center (MDC) using the configurator tool:%0D%0A%0D%0AConfiguration Specifications:%0D%0A- Configuration Code: ${configCode}%0D%0A- Recommended Edition: ${recommendedEdition}%0D%0A- Target Use Case: ${caseObj.name}%0D%0A- User Bandwidth: ${usersObj.name}%0D%0A- Storage Option: ${storageObj.name}%0D%0A- Battery Runtime Option: ${runtimeObj.name}%0D%0A- Security Enforcement: ${securityObj.name}%0D%0A- Service Modules: ${serviceObj.name}%0D%0A%0D%0AEstimated Ex-Works Price: ${isQuoteBased ? 'Contact for Quote (Enterprise)' : `₹${subtotal.toLocaleString('en-IN')}`}%0D%0A(Pre-book package includes lifetime free BITSOTRON Core license and 40% discount on edge hardware)%0D%0A%0D%0APlease contact me to finalize this configuration and outline billing steps.%0D%0A%0D%0ARegards,%0D%0A[Name]%0D%0A[Phone Number]`;
 
   return (
     <div className={styles.pageWrapper}>
@@ -125,7 +150,7 @@ export default function MDCBuildingPage() {
           </Link>
           <h1>BITSOTRON MDC Building Portal</h1>
           <p style={{ maxWidth: '640px', margin: '0.5rem auto 0', color: 'var(--color-muted)' }}>
-            Design your bespoke Mission Diagnostic Computer (MDC). Mix components, select sector modules, and configure edge licenses.
+            Design your bespoke Mission Diagnostic Computer (MDC) using exact product engineering specifications.
           </p>
         </div>
 
@@ -150,30 +175,30 @@ export default function MDCBuildingPage() {
             <div className={styles.buildPanel}>
               {activeStep === 0 && (
                 <div>
-                  <h3 className={styles.stepTitle}>Choose Base Platform Model</h3>
-                  <p className={styles.stepDesc}>The chassis defines the computing frame, size limits, and base micro-kernel target license.</p>
+                  <h3 className={styles.stepTitle}>Choose Target Use Case</h3>
+                  <p className={styles.stepDesc}>Selecting your primary deployment scenario auto-calibrates micro-kernel settings and chassis selections.</p>
                   <div className={styles.optionsGrid}>
-                    {BASE_MODELS.map(opt => {
-                      const Icon = opt.id === 'software' ? Settings : opt.id === 'edge-s1' ? Zap : Cpu;
+                    {USE_CASES.map(opt => {
+                      const Icon =
+                        opt.id === 'case-edu' ? BookOpen :
+                        opt.id === 'case-ngo' ? HeartPulse :
+                        opt.id === 'case-disaster' ? Shield :
+                        opt.id === 'case-media' ? Database :
+                        opt.id === 'case-field' ? Wrench :
+                        opt.id === 'case-business' ? Store : Settings;
                       return (
                         <div
                           key={opt.id}
-                          onClick={() => setSelectedBase(opt.id)}
-                          className={`${styles.optionCard} ${selectedBase === opt.id ? styles.activeCard : ''}`}
+                          onClick={() => setSelectedCase(opt.id)}
+                          className={`${styles.optionCard} ${selectedCase === opt.id ? styles.activeCard : ''}`}
                         >
                           <div className={styles.optionHeader}>
                             <h4 className={styles.optionTitle} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                               <Icon size={18} color="#FC9700" style={{ flexShrink: 0 }} />
                               {opt.name}
                             </h4>
-                            <span className={styles.optionCost}>₹{opt.price.toLocaleString('en-IN')}</span>
                           </div>
                           <p className={styles.optionText}>{opt.desc}</p>
-                          {opt.originalPrice && (
-                            <div style={{ fontSize: '0.75rem', color: '#16a34a', fontWeight: 600, marginTop: '4px' }}>
-                              Save ₹{(opt.originalPrice - opt.price).toLocaleString('en-IN')} (40% Off!)
-                            </div>
-                          )}
                         </div>
                       );
                     })}
@@ -183,36 +208,33 @@ export default function MDCBuildingPage() {
 
               {activeStep === 1 && (
                 <div>
-                  <h3 className={styles.stepTitle}>Select CPU Engine / Processor</h3>
-                  <p className={styles.stepDesc}>Select the processor core architecture best matching your edge diagnostics throughput goals.</p>
+                  <h3 className={styles.stepTitle}>Select Active User Bandwidth</h3>
+                  <p className={styles.stepDesc}>Define the typical number of clients connecting concurrently to the device Wi-Fi hotspot.</p>
                   <div className={styles.optionsGrid}>
-                    {PROCESSORS.map(opt => {
-                      const Icon = opt.id === 'arm64' ? Cpu : opt.id === 'x86_64' ? Settings : Zap;
-                      return (
-                        <div
-                          key={opt.id}
-                          onClick={() => setSelectedCpu(opt.id)}
-                          className={`${styles.optionCard} ${selectedCpu === opt.id ? styles.activeCard : ''}`}
-                        >
-                          <div className={styles.optionHeader}>
-                            <h4 className={styles.optionTitle} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                              <Icon size={18} color="#FC9700" style={{ flexShrink: 0 }} />
-                              {opt.name}
-                            </h4>
-                            <span className={styles.optionCost}>{opt.price === 0 ? 'Included' : `+₹${opt.price.toLocaleString('en-IN')}`}</span>
-                          </div>
-                          <p className={styles.optionText}>{opt.desc}</p>
+                    {USER_COUNTS.map(opt => (
+                      <div
+                        key={opt.id}
+                        onClick={() => setSelectedUsers(opt.id)}
+                        className={`${styles.optionCard} ${selectedUsers === opt.id ? styles.activeCard : ''}`}
+                      >
+                        <div className={styles.optionHeader}>
+                          <h4 className={styles.optionTitle} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                            <Users size={18} color="#FC9700" style={{ flexShrink: 0 }} />
+                            {opt.name}
+                          </h4>
+                          <span className={styles.optionCost}>{opt.price === 0 ? 'Included' : `+₹${opt.price.toLocaleString('en-IN')}`}</span>
                         </div>
-                      );
-                    })}
+                        <p className={styles.optionText}>{opt.desc}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
 
               {activeStep === 2 && (
                 <div>
-                  <h3 className={styles.stepTitle}>Configure Enterprise Storage Tier</h3>
-                  <p className={styles.stepDesc}>Select NVMe storage capacity based on how much telemetry and files you want to log locally offline.</p>
+                  <h3 className={styles.stepTitle}>Configure Storage Needs</h3>
+                  <p className={styles.stepDesc}>Configure the storage capacity based on how much local data (PDFs, offline media, directories) you need.</p>
                   <div className={styles.optionsGrid}>
                     {STORAGE_OPTIONS.map(opt => (
                       <div
@@ -236,46 +258,65 @@ export default function MDCBuildingPage() {
 
               {activeStep === 3 && (
                 <div>
-                  <h3 className={styles.stepTitle}>Select Sector Offline Content Crate</h3>
-                  <p className={styles.stepDesc}>Choose sector-specific database packages preloaded offline to bootstrap local usage immediately.</p>
+                  <h3 className={styles.stepTitle}>Select Battery Life / Runtime</h3>
+                  <p className={styles.stepDesc}>Select the internal Li-FePO4 battery pack capacity required for remote or off-grid operations.</p>
                   <div className={styles.optionsGrid}>
-                    {SECTOR_CRATES.map(opt => {
-                      const Icon =
-                        opt.id === 'none' ? Settings :
-                        opt.id === 'crate-edu' ? BookOpen :
-                        opt.id === 'crate-health' ? HeartPulse :
-                        opt.id === 'crate-retail' ? Store : Wrench;
-                      return (
-                        <div
-                          key={opt.id}
-                          onClick={() => setSelectedCrate(opt.id)}
-                          className={`${styles.optionCard} ${selectedCrate === opt.id ? styles.activeCard : ''}`}
-                        >
-                          <div className={styles.optionHeader}>
-                            <h4 className={styles.optionTitle} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                              <Icon size={18} color="#FC9700" style={{ flexShrink: 0 }} />
-                              {opt.name}
-                            </h4>
-                            <span className={styles.optionCost}>{opt.price === 0 ? 'Included' : `+₹${opt.price.toLocaleString('en-IN')}`}</span>
-                          </div>
-                          <p className={styles.optionText}>{opt.desc}</p>
+                    {RUNTIMES.map(opt => (
+                      <div
+                        key={opt.id}
+                        onClick={() => setSelectedRuntime(opt.id)}
+                        className={`${styles.optionCard} ${selectedRuntime === opt.id ? styles.activeCard : ''}`}
+                      >
+                        <div className={styles.optionHeader}>
+                          <h4 className={styles.optionTitle} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                            <Battery size={18} color="#FC9700" style={{ flexShrink: 0 }} />
+                            {opt.name}
+                          </h4>
+                          <span className={styles.optionCost}>{opt.price === 0 ? 'Included' : `+₹${opt.price.toLocaleString('en-IN')}`}</span>
                         </div>
-                      );
-                    })}
+                        <p className={styles.optionText}>{opt.desc}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
 
               {activeStep === 4 && (
                 <div>
-                  <h3 className={styles.stepTitle}>Add Engineering & Support Services</h3>
-                  <p className={styles.stepDesc}>Opt-in to micro-kernel optimization, data loading, or custom 24/7 hardware support response layers.</p>
+                  <h3 className={styles.stepTitle}>Configure Security Level</h3>
+                  <p className={styles.stepDesc}>Opt-in to hardware cryptographic enclaves, partition encryption, or simple role directories.</p>
+                  <div className={styles.optionsGrid}>
+                    {SECURITY_LEVELS.map(opt => (
+                      <div
+                        key={opt.id}
+                        onClick={() => setSelectedSecurity(opt.id)}
+                        className={`${styles.optionCard} ${selectedSecurity === opt.id ? styles.activeCard : ''}`}
+                      >
+                        <div className={styles.optionHeader}>
+                          <h4 className={styles.optionTitle} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                            <Shield size={18} color="#FC9700" style={{ flexShrink: 0 }} />
+                            {opt.name}
+                          </h4>
+                          <span className={styles.optionCost}>{opt.price === 0 ? 'Included' : `+₹${opt.price.toLocaleString('en-IN')}`}</span>
+                        </div>
+                        <p className={styles.optionText}>{opt.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {activeStep === 5 && (
+                <div>
+                  <h3 className={styles.stepTitle}>Choose Core Service Module</h3>
+                  <p className={styles.stepDesc}>Opt-in to custom collaboration features, developer Git servers, local MQTT setups, or Edge AI modules.</p>
                   <div className={styles.optionsGrid}>
                     {SERVICES.map(opt => {
                       const Icon =
-                        opt.id === 'none' ? Settings :
-                        opt.id === 'service-seed' ? Database :
-                        opt.id === 'service-sla' ? Shield : Wrench;
+                        opt.id === 'srv-share' ? Settings :
+                        opt.id === 'srv-chat' ? BookOpen :
+                        opt.id === 'srv-dev' ? Cpu :
+                        opt.id === 'srv-ai' ? Zap : Shield;
                       return (
                         <div
                           key={opt.id}
@@ -290,40 +331,6 @@ export default function MDCBuildingPage() {
                             <span className={styles.optionCost}>{opt.price === 0 ? 'Included' : `+₹${opt.price.toLocaleString('en-IN')}`}</span>
                           </div>
                           <p className={styles.optionText}>{opt.desc}</p>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-
-              {activeStep === 5 && (
-                <div>
-                  <h3 className={styles.stepTitle}>Auxiliary Hardware Upgrades</h3>
-                  <p className={styles.stepDesc}>Add optional protective casing shells, battery expansion bricks, or security co-processors.</p>
-                  <div className={styles.optionsGrid}>
-                    {UPGRADES.map(opt => {
-                      const isSelected = selectedUpgrades.includes(opt.id);
-                      const Icon =
-                        opt.id === 'up-ip67' ? Shield :
-                        opt.id === 'up-battery' ? Battery : Shield;
-                      return (
-                        <div
-                          key={opt.id}
-                          onClick={() => handleToggleUpgrade(opt.id)}
-                          className={`${styles.optionCard} ${isSelected ? styles.activeCard : ''}`}
-                        >
-                          <div className={styles.optionHeader}>
-                            <h4 className={styles.optionTitle} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                              <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 20, height: 20, border: '2px solid #FC9700', borderRadius: '4px', flexShrink: 0, background: isSelected ? '#FC9700' : 'transparent' }}>
-                                {isSelected && <Check size={14} color="#fff" />}
-                              </span>
-                              <Icon size={18} color="#FC9700" style={{ flexShrink: 0 }} />
-                              {opt.name}
-                            </h4>
-                            <span className={styles.optionCost}>+₹{opt.price.toLocaleString('en-IN')}</span>
-                          </div>
-                          <p className={styles.optionText} style={{ paddingLeft: 30 }}>{opt.desc}</p>
                         </div>
                       );
                     })}
@@ -365,75 +372,6 @@ export default function MDCBuildingPage() {
           {/* Right Column: Floating Console Summary */}
           <div className={styles.sidebarSummary}>
             <div className={styles.consoleCard}>
-              {/* CSS 3D Model Visualizer */}
-              <div className={styles.modelViewport}>
-                <div className={styles.modelStage}>
-                  {/* Base Chassis Box */}
-                  <div className={`${styles.cube} ${
-                    selectedBase === 'software' ? styles.cubeSoftware :
-                    selectedBase === 'edge-s1' ? styles.cubeEdgeS1 : styles.cubeEdgeX5
-                  }`}>
-                    {/* Front Face with LED Light & Text */}
-                    <div className={`${styles.face} ${styles.faceFront}`}>
-                      <div className={`${styles.ledLight} ${
-                        selectedBase !== 'software' ? styles.ledLightActive : ''
-                      }`} />
-                      <span style={{ fontSize: selectedBase === 'software' ? '7px' : '9px', color: '#FC9700', fontWeight: 'bold', letterSpacing: '0.05em' }}>
-                        {selectedBase === 'software' ? 'CORE v1.0' :
-                         selectedBase === 'edge-s1' ? 'EDGE S1' : 'EDGE X5'}
-                      </span>
-                    </div>
-                    {/* Other 3D Cube Faces */}
-                    <div className={`${styles.face} ${styles.faceBack}`} />
-                    <div className={`${styles.face} ${styles.faceLeft}`} />
-                    <div className={`${styles.face} ${styles.faceRight}`} />
-                    <div className={`${styles.face} ${styles.faceTop}`}>
-                      {/* CPU chip light on top */}
-                      {selectedCpu === 'fpga' ? (
-                        <div className={`${styles.procCoreLight} ${styles.procFpgaLight}`} />
-                      ) : selectedCpu === 'x86_64' ? (
-                        <div className={styles.chipGrid}>
-                          <span /><span /><span />
-                          <span /><span /><span />
-                          <span /><span /><span />
-                        </div>
-                      ) : (
-                        <div className={styles.procCoreLight} />
-                      )}
-                    </div>
-                    <div className={`${styles.face} ${styles.faceBottom}`} />
-                  </div>
-
-                  {/* Battery Expansion Attachment (renders under Edge chassis if selected) */}
-                  {selectedUpgrades.includes('up-battery') && selectedBase !== 'software' && (
-                    <div className={`${styles.batteryUpgrade} ${
-                      selectedBase === 'edge-s1' ? styles.batS1 : styles.batX5
-                    }`}>
-                      <div className={`${styles.batteryFace} ${styles.batteryFaceFront}`} />
-                      <div className={`${styles.batteryFace} ${styles.batteryFaceBack}`} />
-                      <div className={`${styles.batteryFace} ${styles.batteryFaceLeft}`} />
-                      <div className={`${styles.batteryFace} ${styles.batteryFaceRight}`} />
-                      <div className={`${styles.batteryFace} ${styles.batteryFaceTop}`} />
-                      <div className={`${styles.batteryFace} ${styles.batteryFaceBottom}`} />
-                    </div>
-                  )}
-
-                  {/* IP67 Outer Shield Casing (renders surrounding Edge S1 / X5 if selected) */}
-                  {selectedUpgrades.includes('up-ip67') && selectedBase !== 'software' && (
-                    <div className={`${styles.caseUpgrade} ${
-                      selectedBase === 'edge-s1' ? styles.caseS1 : styles.caseX5
-                    }`}>
-                      <div className={`${styles.caseFace} ${styles.caseFaceFront}`} />
-                      <div className={`${styles.caseFace} ${styles.caseFaceBack}`} />
-                      <div className={`${styles.caseFace} ${styles.caseFaceLeft}`} />
-                      <div className={`${styles.caseFace} ${styles.caseFaceRight}`} />
-                      <div className={`${styles.caseFace} ${styles.caseFaceTop}`} />
-                      <div className={`${styles.caseFace} ${styles.caseFaceBottom}`} />
-                    </div>
-                  )}
-                </div>
-              </div>
-
               <div className={styles.consoleHeader}>
                 <div className={styles.statusWrapper}>
                   <div className={styles.statusDot} />
@@ -443,44 +381,56 @@ export default function MDCBuildingPage() {
               </div>
 
               <div className={styles.consoleBody}>
-                <h4 className={styles.consoleHeading}>Build Components</h4>
+                <h4 className={styles.consoleHeading}>Recommended System</h4>
 
-                {/* Base platform */}
-                <div className={styles.partRow}>
-                  <span className={styles.partLabel}>Base:</span>
-                  <span className={styles.partVal}>{baseObj.name.split(' (')[0]}</span>
+                {/* Recommended Edition */}
+                <div className={styles.partRow} style={{ marginBottom: 10 }}>
+                  <span className={styles.partLabel} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                    <Layers size={14} color="#FCBD00" /> System Edition:
+                  </span>
+                  <span className={styles.partVal} style={{ color: '#FCBD00', fontSize: '1rem', fontWeight: 800 }}>
+                    {recommendedEdition}
+                  </span>
                 </div>
 
-                {/* CPU */}
+                <hr className={styles.divider} />
+
+                <h4 className={styles.consoleHeading} style={{ marginTop: 10 }}>Selected Configuration</h4>
+
+                {/* Use case */}
                 <div className={styles.partRow}>
-                  <span className={styles.partLabel}>CPU:</span>
-                  <span className={styles.partVal}>{cpuObj.name.split(' (')[0]}</span>
+                  <span className={styles.partLabel}>Use Case:</span>
+                  <span className={styles.partVal}>{caseObj.name.split(' & ')[0]}</span>
+                </div>
+
+                {/* Users count */}
+                <div className={styles.partRow}>
+                  <span className={styles.partLabel}>User Range:</span>
+                  <span className={styles.partVal}>{usersObj.name}</span>
                 </div>
 
                 {/* Storage */}
                 <div className={styles.partRow}>
-                  <span className={styles.partLabel}>Storage:</span>
+                  <span className={styles.partLabel}>Storage size:</span>
                   <span className={styles.partVal}>{storageObj.name.split(' ')[0]}</span>
                 </div>
 
-                {/* Sector Crate */}
+                {/* Battery */}
                 <div className={styles.partRow}>
-                  <span className={styles.partLabel}>Sector Crate:</span>
-                  <span className={styles.partVal}>{crateObj.id === 'none' ? 'None' : crateObj.name.split(' ')[0]}</span>
+                  <span className={styles.partLabel}>Battery backup:</span>
+                  <span className={styles.partVal}>{runtimeObj.name.split(' ')[0]}</span>
+                </div>
+
+                {/* Security */}
+                <div className={styles.partRow}>
+                  <span className={styles.partLabel}>Security level:</span>
+                  <span className={styles.partVal}>{securityObj.name.split(' ')[0]}</span>
                 </div>
 
                 {/* Service */}
                 <div className={styles.partRow}>
-                  <span className={styles.partLabel}>Service:</span>
-                  <span className={styles.partVal}>{serviceObj.id === 'none' ? 'Self-Managed' : serviceObj.name.split(' (')[0].split(' ')[0]}</span>
-                </div>
-
-                {/* Upgrades list */}
-                <div className={styles.partRow}>
-                  <span className={styles.partLabel}>Upgrades:</span>
-                  <span className={styles.partVal}>
-                    {activeUpgrades.length === 0 ? 'None' : `${activeUpgrades.length} Selected`}
-                  </span>
+                  <span className={styles.partLabel}>Service module:</span>
+                  <span className={styles.partVal}>{serviceObj.name.split(' & ')[0]}</span>
                 </div>
 
                 <hr className={styles.divider} />
@@ -504,12 +454,12 @@ export default function MDCBuildingPage() {
                 <hr className={styles.divider} />
 
                 {/* Promotion details */}
-                {(selectedBase !== 'software' || totalSavings > 0) && (
+                {!isQuoteBased && (
                   <div className={styles.promoPanel}>
                     <strong>⚡ PRE-BOOK OFFERS INCLUDED:</strong>
                     <ul style={{ paddingLeft: '1.2rem', margin: '4px 0 0', fontSize: '0.75rem' }}>
                       <li>Lifetime free BITSOTRON Core license</li>
-                      {selectedBase !== 'software' && <li>40% launch discount on hardware chassis</li>}
+                      <li>40% launch discount on hardware chassis</li>
                     </ul>
                   </div>
                 )}
@@ -518,8 +468,14 @@ export default function MDCBuildingPage() {
                 <div className={styles.priceWrapper}>
                   <span className={styles.priceLabel}>Ex-Works Estimated Cost:</span>
                   <div className={styles.priceVal}>
-                    ₹{subtotal.toLocaleString('en-IN')}
-                    <span className={styles.currency}>INR</span>
+                    {isQuoteBased ? (
+                      <span style={{ fontSize: '1.3rem', color: '#FCBD00', fontWeight: 'bold' }}>Enterprise Quote</span>
+                    ) : (
+                      <>
+                        ₹{subtotal.toLocaleString('en-IN')}
+                        <span className={styles.currency}>INR</span>
+                      </>
+                    )}
                   </div>
                 </div>
 
@@ -528,7 +484,7 @@ export default function MDCBuildingPage() {
                   className={styles.prebookButtonLink}
                 >
                   <Button variant="primary" size="lg" style={{ width: '100%' }} icon={<Mail size={18} />}>
-                    Pre-Book Custom MDC (INR)
+                    {isQuoteBased ? 'Request Enterprise Quote' : 'Pre-Book Custom MDC (INR)'}
                   </Button>
                 </a>
               </div>
