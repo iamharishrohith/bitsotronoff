@@ -110,7 +110,7 @@ export default async function HomePage() {
 
             <div className={styles.productVisual}>
               <Image
-                src="/hero-render.png"
+                src="/bitsotron-ecosystem.png"
                 alt="BITSOTRON offline dashboard interface"
                 width={760}
                 height={760}
