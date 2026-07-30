@@ -1,13 +1,38 @@
 .button {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  font-weight: 600;
-  border-radius: var(--radius-md);
-  transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  border-radius: var(--radius-pill);
+  transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
   white-space: nowrap;
   user-select: none;
+  outline: 2px solid transparent;
+  outline-offset: 4px;
+}
+
+.button::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.38), transparent 38%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.button:hover::after {
+  opacity: 1;
+}
+
+.button:focus-visible {
+  outline-color: rgba(255, 209, 102, 0.58);
+  box-shadow: 0 0 0 6px rgba(255, 138, 0, 0.14);
 }
 
 .sm {
@@ -27,20 +52,22 @@
 
 .primary {
   background: var(--gradient-primary);
-  color: #1a1e24;
+  color: #111827;
   border: 1px solid transparent;
-  box-shadow: 0 4px 14px rgba(252, 151, 0, 0.25);
+  box-shadow: var(--shadow-gold);
 }
 
 .primary:hover {
   background: var(--gradient-primary-hover);
-  box-shadow: 0 6px 20px rgba(252, 189, 0, 0.4);
+  box-shadow: 0 20px 54px rgba(252, 189, 0, 0.24), 0 14px 38px rgba(252, 151, 0, 0.28);
 }
 
 .secondary {
-  background: var(--color-dark);
+  background: rgba(16, 19, 26, 0.9);
   color: var(--color-light);
-  border: 1px solid var(--color-border-dark);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
 }
 
 .secondary:hover {
@@ -49,9 +76,11 @@
 }
 
 .outline {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.58);
   color: var(--color-dark);
   border: 1px solid var(--color-border);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
 }
 
 .outline:hover {

@@ -28,8 +28,23 @@
 }
 
 .section-dark {
-  background-color: var(--color-dark);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--gradient-dark-mesh);
   color: var(--color-light);
+}
+
+.section-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(circle at center, black 0%, transparent 78%);
 }
 
 .section-dark h1,
@@ -44,7 +59,10 @@
 }
 
 .section-surface {
-  background-color: var(--color-surface);
+  background:
+    radial-gradient(circle at 12% 10%, rgba(252, 151, 0, 0.08), transparent 28rem),
+    radial-gradient(circle at 86% 20%, rgba(252, 189, 0, 0.16), transparent 28rem),
+    var(--color-surface);
 }
 
 .flex-center {
@@ -115,17 +133,22 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  padding: 0.35rem 0.85rem;
+  padding: 0.42rem 0.95rem;
   border-radius: var(--radius-pill);
-  font-size: 0.85rem;
-  font-weight: 600;
-  background: rgba(252, 151, 0, 0.12);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.72);
   color: var(--accent-orange);
-  border: 1px solid rgba(252, 189, 0, 0.3);
+  border: 1px solid rgba(255, 138, 0, 0.22);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
 }
 
 .badge-dark {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
   color: var(--accent-gold);
-  border: 1px solid rgba(252, 189, 0, 0.25);
+  border: 1px solid rgba(255, 209, 102, 0.3);
 }

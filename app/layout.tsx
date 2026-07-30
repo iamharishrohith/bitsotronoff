@@ -7,9 +7,17 @@ import { PageTransition } from '@/components/layout/PageTransition';
 import { LiveChat } from '@/components/chat/LiveChat';
 
 export const metadata: Metadata = {
-  title: 'BITSOTRON — Autonomous Intelligence & Cyber-Physical Systems',
-  description: 'Production-grade micro-kernel runtime for real-time AI inference, edge orchestration, and fault-tolerant robotics.',
-  keywords: ['Autonomous Intelligence', 'Robotics AI', 'Cyber-Physical Systems', 'Edge Compute', 'Micro-kernel', 'BITSOTRON'],
+  title: 'BITSOTRON — Offline Digital Access Infrastructure',
+  description:
+    'Plug-and-play local Wi‑Fi access hubs for offline videos, documents, forms, catalogs, dashboards, and training content.',
+  keywords: [
+    'Offline Digital Access',
+    'Mini Data Center',
+    'Local Wi-Fi Hub',
+    'Edge Compute',
+    'Rural Connectivity',
+    'BITSOTRON',
+  ],
   authors: [{ name: 'BITSOTRON' }],
   icons: {
     icon: '/logo.png',

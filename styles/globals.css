@@ -1,30 +1,38 @@
-/* CSS Reset & Global Brand Design Tokens for BITSOTRON - Grey Family Theme */
+/* CSS Reset & Global Brand Design Tokens for BITSOTRON - Modern Materials Theme */
 :root {
-  /* Brand Color Tokens - Refined Grey Family Palette */
-  --color-dark: #2d323b;               /* Deep Slate Charcoal Grey */
-  --color-dark-90: rgba(45, 50, 59, 0.9);
-  --color-dark-80: rgba(45, 50, 59, 0.8);
-  --color-dark-surface: #22262f;       /* Dark Surface Grey */
-  --color-dark-card: #373e4a;          /* Elevating Card Grey */
+  /* Brand Color Tokens */
+  --color-dark: #262626;
+  --color-dark-90: rgba(38, 38, 38, 0.9);
+  --color-dark-80: rgba(38, 38, 38, 0.8);
+  --color-dark-surface: #2f2f2f;
+  --color-dark-card: #363636;
   
   --gradient-primary: linear-gradient(90deg, #FC9700 0%, #FCBD00 100%);
   --gradient-primary-hover: linear-gradient(90deg, #e58700 0%, #ebae00 100%);
-  --gradient-glow: linear-gradient(90deg, rgba(252, 151, 0, 0.25) 0%, rgba(252, 189, 0, 0.25) 100%);
+  --gradient-glow: radial-gradient(circle, rgba(252, 151, 0, 0.28) 0%, rgba(252, 189, 0, 0.22) 46%, transparent 72%);
+  --gradient-surface: linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(248, 250, 252, 0.74));
+  --gradient-dark-mesh:
+    radial-gradient(circle at 18% 20%, rgba(252, 151, 0, 0.2), transparent 28%),
+    radial-gradient(circle at 72% 18%, rgba(252, 189, 0, 0.16), transparent 26%),
+    linear-gradient(135deg, #262626 0%, #303030 54%, #202020 100%);
 
   /* Supporting Grey Tones */
   --color-light: #ffffff;
-  --color-surface: #f4f6f8;            /* Soft Slate Light Grey Surface */
-  --color-surface-subtle: #f8fafc;     /* Clean Off-White Grey */
-  --color-muted: #64748b;              /* Muted Slate Text Grey */
-  --color-border: #e2e8f0;             /* Border Light Grey */
-  --color-border-dark: #3f4756;        /* Border Dark Slate Grey */
+  --color-surface: #f6f7fb;
+  --color-surface-subtle: #fbfcff;
+  --color-muted: #657083;
+  --color-border: rgba(15, 23, 42, 0.1);
+  --color-border-dark: rgba(255, 255, 255, 0.12);
   
   --accent-gold: #FCBD00;
   --accent-orange: #FC9700;
+  --accent-blue: #FCBD00;
+  --accent-violet: #FC9700;
+  --accent-green: #FCBD00;
 
   /* Typography Scale */
-  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-family-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-base: 'Aptos', 'Segoe UI Variable', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+  --font-family-display: 'Aptos Display', 'Segoe UI Variable Display', 'Aptos', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
 
   /* Spacing Scale */
   --space-1: 0.25rem;
@@ -40,18 +48,19 @@
 
   /* Border Radius */
   --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.75rem;
+  --radius-2xl: 2.25rem;
   --radius-pill: 9999px;
 
   /* Shadows & Glassmorphism */
-  --shadow-sm: 0 2px 4px rgba(45, 50, 59, 0.05);
-  --shadow-md: 0 4px 12px rgba(45, 50, 59, 0.08);
-  --shadow-lg: 0 12px 32px rgba(45, 50, 59, 0.12);
-  --shadow-gold: 0 8px 24px rgba(252, 151, 0, 0.2);
+  --shadow-sm: 0 8px 24px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 18px 50px rgba(15, 23, 42, 0.1);
+  --shadow-lg: 0 28px 80px rgba(15, 23, 42, 0.16);
+  --shadow-gold: 0 18px 46px rgba(255, 138, 0, 0.26);
 
-  --backdrop-blur: blur(12px);
+  --backdrop-blur: blur(20px) saturate(150%);
 
   /* Container Max Width */
   --container-max-width: 1240px;
@@ -73,9 +82,13 @@ html {
 
 body {
   font-family: var(--font-family-base);
-  background-color: var(--color-light);
+  background:
+    radial-gradient(circle at top left, rgba(252, 189, 0, 0.16), transparent 34rem),
+    radial-gradient(circle at top right, rgba(252, 151, 0, 0.1), transparent 36rem),
+    var(--color-light);
   color: var(--color-dark);
   line-height: 1.6;
+  letter-spacing: -0.006em;
   overflow-x: hidden;
   min-height: 100vh;
   display: flex;
@@ -86,17 +99,19 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-display);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.12;
   color: var(--color-dark);
+  text-wrap: balance;
 }
 
-h1 { font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.02em; }
-h2 { font-size: clamp(2rem, 3.5vw, 2.75rem); letter-spacing: -0.01em; }
-h3 { font-size: clamp(1.35rem, 2.5vw, 1.75rem); }
+h1 { font-size: clamp(2.6rem, 5.4vw, 5.2rem); letter-spacing: -0.045em; }
+h2 { font-size: clamp(2rem, 3.6vw, 3.35rem); letter-spacing: -0.035em; }
+h3 { font-size: clamp(1.25rem, 2vw, 1.55rem); letter-spacing: -0.018em; }
 h4 { font-size: 1.25rem; }
 
 p {
   color: var(--color-muted);
+  text-wrap: pretty;
 }
 
 a {
@@ -124,6 +139,11 @@ img, video {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   display: inline-block;
+}
+
+::selection {
+  background: rgba(255, 209, 102, 0.45);
+  color: var(--color-dark);
 }
 
 /* Accessibility: prefers-reduced-motion */

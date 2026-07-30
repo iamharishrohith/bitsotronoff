@@ -41,13 +41,15 @@ export const Footer: React.FC = () => {
           {/* Brand Column */}
           <div className={styles.brandCol}>
             <Link href="/" className={styles.logoLink}>
-              <Image
-                src="/logo.png"
-                alt="BITSOTRON Logo"
-                width={36}
-                height={36}
-                className={styles.logoImage}
-              />
+              <span className={styles.logoMark}>
+                <Image
+                  src="/logo.png"
+                  alt="BITSOTRON Logo"
+                  width={44}
+                  height={44}
+                  className={styles.logoImage}
+                />
+              </span>
               <span className={styles.logoText}>
                 BITSO<span className="gradient-text">TRON</span>
               </span>
@@ -89,7 +91,6 @@ export const Footer: React.FC = () => {
               <h4 className={styles.colTitle}>Company</h4>
               <ul className={styles.linkList}>
                 <li><Link href="/about">About Us</Link></li>
-                <li><Link href="/customers">Case Studies</Link></li>
                 <li><Link href="/contact">Contact</Link></li>
               </ul>
             </div>

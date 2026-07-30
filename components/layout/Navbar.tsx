@@ -13,7 +13,6 @@ const NAV_LINKS = [
   { label: 'About', href: '/about' },
   { label: 'Products', href: '/products' },
   { label: 'Technology', href: '/technology' },
-  { label: 'Customers', href: '/customers' },
   { label: 'Support', href: '/support' },
   { label: 'Contact', href: '/contact' },
 ];
@@ -42,14 +41,16 @@ export const Navbar: React.FC = () => {
         {/* Brand Logo */}
         <Link href="/" className={styles.logoLink}>
           <div className={styles.logoWrapper}>
-            <Image
-              src="/logo.png"
-              alt="BITSOTRON Logo"
-              width={38}
-              height={38}
-              priority
-              className={styles.logoImage}
-            />
+            <span className={styles.logoMark}>
+              <Image
+                src="/logo.png"
+                alt="BITSOTRON Logo"
+                width={46}
+                height={46}
+                priority
+                className={styles.logoImage}
+              />
+            </span>
             <span className={styles.logoText}>
               BITSO<span className="gradient-text">TRON</span>
             </span>
@@ -86,6 +87,7 @@ export const Navbar: React.FC = () => {
           onClick={() => setIsOpen(!isOpen)}
           className={styles.hamburgerBtn}
           aria-label="Toggle navigation menu"
+          aria-expanded={isOpen}
         >
           {isOpen ? <X size={24} color="#ffffff" /> : <Menu size={24} color="#ffffff" />}
         </button>

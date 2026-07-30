@@ -2,68 +2,109 @@
 
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import styles from './TechArchitectureDiagram.module.css';
+import { Boxes, DatabaseZap, Gauge, Layers3, RadioTower, UsersRound } from 'lucide-react';
+import styles from './AnimationStoryboard.module.css';
 
-type StoryboardNode = 'idea' | 'engineering' | 'testing' | 'manufacturing' | 'sales' | 'scaling';
+type StoryboardNode = 'deploy' | 'connect' | 'publish' | 'measure';
+
+const nodes: Record<
+  StoryboardNode,
+  {
+    label: string;
+    title: string;
+    desc: string;
+  }
+> = {
+  deploy: {
+    label: '01',
+    title: 'Deploy a local hub',
+    desc: 'Place the BITSOTRON unit at a school, event, camp, shop, or field site and power it on.',
+  },
+  connect: {
+    label: '02',
+    title: 'Users join local Wi‑Fi',
+    desc: 'Phones, tablets, and laptops connect to the private network and open mdc.local in a browser.',
+  },
+  publish: {
+    label: '03',
+    title: 'Serve content instantly',
+    desc: 'Videos, PDFs, forms, catalogs, guides, dashboards, and training modules load from the device.',
+  },
+  measure: {
+    label: '04',
+    title: 'Operate with insight',
+    desc: 'Admins can update content, collect offline responses, and review usage signals for each deployment.',
+  },
+};
+
+const nodeOrder = Object.keys(nodes) as StoryboardNode[];
 
 export const AnimationStoryboard: React.FC = () => {
-  const [activeNode, setActiveNode] = useState<StoryboardNode>('idea');
+  const [activeNode, setActiveNode] = useState<StoryboardNode>('deploy');
+  const active = nodes[activeNode];
 
   return (
-    <div className={styles.diagramWrapper} style={{ width: '100%' }}>
-      <div className={styles.svgContainer} style={{ maxWidth: '100%' }}>
-        <svg viewBox="0 0 800 400" className={styles.svg}>
-          {/* Loop Connecting Paths (Hexagon structure) */}
-          <line x1="325" y1="105" x2="475" y2="105" className={styles.pulseLine} />
-          <line x1="475" y1="105" x2="550" y2="200" className={styles.pulseLine} />
-          <line x1="550" y1="200" x2="475" y2="295" className={styles.pulseLine} />
-          <line x1="475" y1="295" x2="325" y2="295" className={styles.pulseLine} />
-          <line x1="325" y1="295" x2="250" y2="200" className={styles.pulseLine} />
-          <line x1="250" y1="200" x2="325" y2="105" className={styles.pulseLine} />
+    <div className={styles.storyShell}>
+      <div className={styles.visualPane}>
+        <motion.div
+          className={styles.halo}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 26, repeat: Infinity, ease: 'linear' }}
+          aria-hidden="true"
+        />
+        <div className={styles.centerDevice}>
+          <Boxes size={34} />
+          <strong>BITSOTRON</strong>
+          <span>Offline Edge Cloud</span>
+        </div>
 
-          {/* Central Loop Node */}
-          <g className={styles.nodeGroup}>
-            <circle cx="400" cy="200" r="55" className={styles.nodeCircleMain} style={{ stroke: '#FCBD00' }} />
-            <text x="400" y="204" className={styles.nodeTextTitleMain}>BITSOTRON</text>
-          </g>
-
-          {/* Node 1: Idea */}
-          <g onClick={() => setActiveNode('idea')} className={styles.nodeGroup}>
-            <circle cx="325" cy="105" r="40" className={`${styles.nodeCircle} ${activeNode === 'idea' ? styles.active : ''}`} />
-            <text x="325" y="109" className={styles.nodeTextTitle}>01. IDEA</text>
-          </g>
-
-          {/* Node 2: Engineering */}
-          <g onClick={() => setActiveNode('engineering')} className={styles.nodeGroup}>
-            <circle cx="475" cy="105" r="40" className={`${styles.nodeCircle} ${activeNode === 'engineering' ? styles.active : ''}`} />
-            <text x="475" y="109" className={styles.nodeTextTitle}>02. DEV</text>
-          </g>
-
-          {/* Node 3: Testing */}
-          <g onClick={() => setActiveNode('testing')} className={styles.nodeGroup}>
-            <circle cx="550" cy="200" r="40" className={`${styles.nodeCircle} ${activeNode === 'testing' ? styles.active : ''}`} />
-            <text x="550" y="204" className={styles.nodeTextTitle}>03. TEST</text>
-          </g>
-
-          {/* Node 4: Manufacturing */}
-          <g onClick={() => setActiveNode('manufacturing')} className={styles.nodeGroup}>
-            <circle cx="475" cy="295" r="40" className={`${styles.nodeCircle} ${activeNode === 'manufacturing' ? styles.active : ''}`} />
-            <text x="475" y="299" className={styles.nodeTextTitle}>04. BUILD</text>
-          </g>
-
-          {/* Node 5: Sales */}
-          <g onClick={() => setActiveNode('sales')} className={styles.nodeGroup}>
-            <circle cx="325" cy="295" r="40" className={`${styles.nodeCircle} ${activeNode === 'sales' ? styles.active : ''}`} />
-            <text x="325" y="299" className={styles.nodeTextTitle}>05. GTM</text>
-          </g>
-
-          {/* Node 6: Scaling & Loop */}
-          <g onClick={() => setActiveNode('scaling')} className={styles.nodeGroup}>
-            <circle cx="250" cy="200" r="40" className={`${styles.nodeCircle} ${activeNode === 'scaling' ? styles.active : ''}`} />
-            <text x="250" y="204" className={styles.nodeTextTitle}>06. SCALE</text>
-          </g>
-        </svg>
+        {nodeOrder.map((key, index) => {
+          const Icon = [Layers3, RadioTower, DatabaseZap, Gauge][index];
+          return (
+            <button
+              key={key}
+              type="button"
+              onClick={() => setActiveNode(key)}
+              className={`${styles.orbitNode} ${styles[`node${index + 1}`]} ${
+                activeNode === key ? styles.active : ''
+              }`}
+            >
+              <Icon size={20} />
+              <span>{nodes[key].label}</span>
+            </button>
+          );
+        })}
       </div>
+
+      <motion.div
+        key={activeNode}
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.24 }}
+        className={styles.copyPane}
+      >
+        <span className="badge">Company architecture</span>
+        <h3>{active.title}</h3>
+        <p>{active.desc}</p>
+        <div className={styles.metricsGrid}>
+          <div>
+            <strong>6+</strong>
+            <span>content types</span>
+          </div>
+          <div>
+            <strong>0</strong>
+            <span>internet dependency</span>
+          </div>
+          <div>
+            <strong>Many</strong>
+            <span>sector use cases</span>
+          </div>
+        </div>
+        <div className={styles.userRow}>
+          <UsersRound size={18} />
+          <span>Built for education, healthcare, agriculture, retail, events, industry, and rural programs.</span>
+        </div>
+      </motion.div>
     </div>
   );
 };
