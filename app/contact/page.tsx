@@ -30,16 +30,16 @@ export default function ContactPage() {
             </span>
             <h2 style={{ marginBottom: '1rem' }}>Get in Touch</h2>
             <p style={{ marginBottom: '1.5rem', lineHeight: '1.7' }}>
-              We are currently transitioning our automated ticketing systems. For immediate engineering assistance, hardware benchmarks, or licensing inquiries, please reach out directly to our systems architecture group.
+              For business inquiries, architectural partnerships, or licensing requirements, feel free to reach out to our core systems leadership.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1.5rem' }}>
               <div style={{ padding: '1rem', background: 'var(--color-surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
-                <strong style={{ fontSize: '0.9rem', color: 'var(--color-dark)' }}>📨 General & Press Inquiries:</strong><br />
-                <a href="mailto:bitsotron@gmail.com" style={{ color: '#FC9700', fontWeight: 600, fontSize: '0.95rem' }}>bitsotron@gmail.com</a>
+                <strong style={{ fontSize: '0.9rem', color: 'var(--color-muted)', display: 'block', marginBottom: '0.25rem' }}>💼 Founder / CEO:</strong>
+                <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--color-dark)' }}>Thamizharasan N</span>
               </div>
               <div style={{ padding: '1rem', background: 'var(--color-surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
-                <strong style={{ fontSize: '0.9rem', color: 'var(--color-dark)' }}>🛠️ Systems Engineering:</strong><br />
-                <a href="mailto:engineering@bitsotron.com" style={{ color: '#FC9700', fontWeight: 600, fontSize: '0.95rem' }}>engineering@bitsotron.com</a>
+                <strong style={{ fontSize: '0.9rem', color: 'var(--color-muted)', display: 'block', marginBottom: '0.25rem' }}>🛠️ Tech Lead:</strong>
+                <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--color-dark)' }}>Harish Rohith S</span>
               </div>
             </div>
           </div>
@@ -52,10 +52,9 @@ export default function ContactPage() {
                 </div>
                 <h3 style={{ fontSize: '1.15rem', margin: 0 }}>Email Inquiries</h3>
               </div>
-              <p style={{ color: '#6b6b6b', fontSize: '0.95rem' }}>
-                <strong>Official Email:</strong> <a href="mailto:bitsotron@gmail.com" style={{ color: '#FC9700', fontWeight: 600 }}>bitsotron@gmail.com</a> <br />
-                <strong>Technical:</strong> engineering@bitsotron.com <br />
-                <strong>Sales & OEM:</strong> sales@bitsotron.com
+              <p style={{ color: '#6b6b6b', fontSize: '0.95rem', lineHeight: 1.6 }}>
+                Reach us directly at:<br />
+                <a href="mailto:iamharishrohith@gmail.com" style={{ color: '#FC9700', fontWeight: 600 }}>iamharishrohith@gmail.com</a>
               </p>
             </Card>
 
@@ -66,9 +65,9 @@ export default function ContactPage() {
                 </div>
                 <h3 style={{ fontSize: '1.15rem', margin: 0 }}>Phone Hotline</h3>
               </div>
-              <p style={{ color: '#6b6b6b', fontSize: '0.95rem' }}>
-                +1 (800) 555-BITSO (Toll Free US/CA) <br />
-                +41 44 555 2400 (European Hub)
+              <p style={{ color: '#6b6b6b', fontSize: '0.95rem', lineHeight: 1.6 }}>
+                Call or message directly for technical escalations:<br />
+                <a href="tel:8903416887" style={{ color: '#FC9700', fontWeight: 600 }}>+91 89034 16887</a>
               </p>
             </Card>
           </div>
