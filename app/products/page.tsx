@@ -39,16 +39,33 @@ export default async function ProductsPage() {
           <div className="grid-3">
             {products.map((item) => {
               const prod = item.entry;
+              const title = prod.title || (
+                item.slug === 'bitsotron-core' ? 'BITSOTRON Core Platform' :
+                item.slug === 'bitsotron-edge' ? 'BITSOTRON Edge Node' : 'BITSOTRON Shield'
+              );
+              const tagline = prod.tagline || (
+                item.slug === 'bitsotron-core' ? 'Real-time Autonomous Decision Engine' :
+                item.slug === 'bitsotron-edge' ? 'Ultra-Compact Micro-Compute System' : 'Zero-Trust Cryptographic Armor'
+              );
+              const summary = prod.summary || (
+                item.slug === 'bitsotron-core' ? 'High-speed distributed neural runtime capable of evaluating sub-millisecond sensor telemetry and executing deterministic control workflows.' :
+                item.slug === 'bitsotron-edge' ? 'Hardened edge device offering 50 TOPS AI processing at less than 15W power consumption for autonomous field hardware.' :
+                'Quantum-resistant encryption layer and real-time anomaly firewall for connected cyber-physical networks.'
+              );
+              const IconComponent =
+                item.slug === 'bitsotron-core' ? Cpu :
+                item.slug === 'bitsotron-edge' ? Zap : ShieldCheck;
+
               return (
                 <Card key={item.slug} variant="default">
                   <div style={{ width: 48, height: 48, borderRadius: 8, background: 'rgba(252,151,0,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
-                    <Cpu size={24} color="#FC9700" />
+                    <IconComponent size={24} color="#FC9700" />
                   </div>
-                  <h3>{prod.title}</h3>
+                  <h3 style={{ color: 'var(--color-dark)', marginBottom: '0.5rem' }}>{title}</h3>
                   <p style={{ color: '#FC9700', fontWeight: 600, fontSize: '0.875rem', margin: '4px 0 12px' }}>
-                    {prod.tagline}
+                    {tagline}
                   </p>
-                  <p style={{ fontSize: '0.95rem', marginBottom: '1.5rem' }}>{prod.summary}</p>
+                  <p style={{ fontSize: '0.95rem', marginBottom: '1.5rem', color: 'var(--color-muted)', lineHeight: 1.6 }}>{summary}</p>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: '1.5rem', fontSize: '0.85rem', color: '#6b6b6b' }}>
                     <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -90,9 +107,9 @@ export default async function ProductsPage() {
         <div className="container" style={{ maxWidth: '1100px' }}>
           <div className="text-center" style={{ marginBottom: '3rem' }}>
             <span className="badge">PRODUCT BUILDER</span>
-            <h2 style={{ marginTop: '0.75rem' }}>Configure Your BITSOTRON Unit</h2>
+            <h2 style={{ marginTop: '0.75rem' }}>BITSOTRON Pricing Catalog</h2>
             <p style={{ maxWidth: '640px', margin: '0.5rem auto 0' }}>
-              Select your platform specifications and build a custom hardware spec. Generate a configuration code to email directly to our solutions group.
+              Indicative ex-works pricing catalogue for platform bases, custom edge processing, storage variants, and modules.
             </p>
           </div>
           <HardwareConfigurator />
