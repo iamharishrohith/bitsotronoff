@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { getProducts } from '@/lib/keystatic';
 import { ProductComparisonTable } from '@/components/sections/ProductComparisonTable';
+import { HardwareConfigurator } from '@/components/sections/HardwareConfigurator';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { ArrowRight, Cpu, Zap, ShieldCheck, CheckCircle2 } from 'lucide-react';
@@ -81,6 +82,20 @@ export default async function ProductsPage() {
             </p>
           </div>
           <ProductComparisonTable />
+        </div>
+      </section>
+
+      {/* Interactive Hardware Configurator Section */}
+      <section className="section section-surface">
+        <div className="container" style={{ maxWidth: '1100px' }}>
+          <div className="text-center" style={{ marginBottom: '3rem' }}>
+            <span className="badge">PRODUCT BUILDER</span>
+            <h2 style={{ marginTop: '0.75rem' }}>Configure Your BITSOTRON Unit</h2>
+            <p style={{ maxWidth: '640px', margin: '0.5rem auto 0' }}>
+              Select your platform specifications and build a custom hardware spec. Generate a configuration code to email directly to our solutions group.
+            </p>
+          </div>
+          <HardwareConfigurator />
         </div>
       </section>
 
