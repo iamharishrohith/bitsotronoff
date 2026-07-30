@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from '@/components/ui/Card';
-import { Mail, Phone } from 'lucide-react';
+import { Mail, Phone, Briefcase, Wrench } from 'lucide-react';
 
 export default function ContactPage() {
   return (
@@ -33,13 +33,23 @@ export default function ContactPage() {
               For business inquiries, architectural partnerships, or licensing requirements, feel free to reach out to our core systems leadership.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1.5rem' }}>
-              <div style={{ padding: '1rem', background: 'var(--color-surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
-                <strong style={{ fontSize: '0.9rem', color: 'var(--color-muted)', display: 'block', marginBottom: '0.25rem' }}>💼 Founder / CEO:</strong>
-                <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--color-dark)' }}>Thamizharasan N</span>
+              <div style={{ padding: '1rem', background: 'var(--color-surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, borderRadius: 6, background: 'rgba(252,151,0,0.1)', color: '#FC9700', flexShrink: 0 }}>
+                  <Briefcase size={16} />
+                </div>
+                <div>
+                  <strong style={{ fontSize: '0.85rem', color: 'var(--color-muted)', display: 'block' }}>Founder / CEO:</strong>
+                  <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--color-dark)' }}>Thamizharasan N</span>
+                </div>
               </div>
-              <div style={{ padding: '1rem', background: 'var(--color-surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
-                <strong style={{ fontSize: '0.9rem', color: 'var(--color-muted)', display: 'block', marginBottom: '0.25rem' }}>🛠️ Tech Lead:</strong>
-                <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--color-dark)' }}>Harish Rohith S</span>
+              <div style={{ padding: '1rem', background: 'var(--color-surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, borderRadius: 6, background: 'rgba(252,151,0,0.1)', color: '#FC9700', flexShrink: 0 }}>
+                  <Wrench size={16} />
+                </div>
+                <div>
+                  <strong style={{ fontSize: '0.85rem', color: 'var(--color-muted)', display: 'block' }}>Tech Lead:</strong>
+                  <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--color-dark)' }}>Harish Rohith S</span>
+                </div>
               </div>
             </div>
           </div>

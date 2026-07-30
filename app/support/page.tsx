@@ -89,7 +89,9 @@ export default function SupportPage() {
             We are upgrading our support queue channels. For critical issues, ticket submissions, and SLA priority escalations, please contact us directly via email.
           </p>
           <div style={{ display: 'inline-flex', flexDirection: 'column', gap: '0.5rem', padding: '1.5rem', background: 'var(--color-dark)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border-dark)' }}>
-            <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>🎯 Dedicated Support Line:</span>
+            <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+              <LifeBuoy size={16} color="#FC9700" /> Dedicated Support Line:
+            </span>
             <a href="mailto:support@bitsotron.com" style={{ color: '#FC9700', fontWeight: 700, fontSize: '1.15rem' }}>support@bitsotron.com</a>
             <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.8rem', marginTop: '0.5rem' }}>Typical response within 1 hour for Enterprise SLAs</span>
           </div>

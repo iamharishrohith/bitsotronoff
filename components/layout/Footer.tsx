@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Send, Linkedin, Twitter, Github, Youtube, Check, ShieldCheck } from 'lucide-react';
+import { Send, Linkedin, Twitter, Github, Youtube, Check, ShieldCheck, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import styles from './Footer.module.css';
 
@@ -96,9 +96,12 @@ export const Footer: React.FC = () => {
             <p className={styles.newsletterText} style={{ marginBottom: '1rem' }}>
               Follow our engineering logs, research pillars, and updates on our verified developers channels.
             </p>
-            <div style={{ padding: '0.85rem 1rem', background: 'var(--color-dark-surface)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(255, 255, 255, 0.05)', fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.7)' }}>
-              <strong>📧 General Announcements:</strong><br />
-              <a href="mailto:bitsotron@gmail.com" style={{ color: '#FCBD00', fontWeight: 600 }}>bitsotron@gmail.com</a>
+            <div style={{ padding: '0.85rem 1rem', background: 'var(--color-dark-surface)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(255, 255, 255, 0.05)', fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.7)', display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+              <Mail size={16} color="#FCBD00" style={{ flexShrink: 0 }} />
+              <div>
+                <strong style={{ display: 'block', fontSize: '0.85rem', color: '#fff' }}>General Announcements:</strong>
+                <a href="mailto:bitsotron@gmail.com" style={{ color: '#FCBD00', fontWeight: 600 }}>bitsotron@gmail.com</a>
+              </div>
             </div>
           </div>
         </div>
