@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, Check, Copy, Mail, RefreshCw, Cpu, Database, Shield, Zap, BookOpen, HeartPulse, Store, Wrench, Settings } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Copy, Mail, RefreshCw, Cpu, Database, Shield, Zap, BookOpen, HeartPulse, Store, Wrench, Settings, Battery } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import styles from './page.module.css';
 
@@ -153,24 +153,30 @@ export default function MDCBuildingPage() {
                   <h3 className={styles.stepTitle}>Choose Base Platform Model</h3>
                   <p className={styles.stepDesc}>The chassis defines the computing frame, size limits, and base micro-kernel target license.</p>
                   <div className={styles.optionsGrid}>
-                    {BASE_MODELS.map(opt => (
-                      <div
-                        key={opt.id}
-                        onClick={() => setSelectedBase(opt.id)}
-                        className={`${styles.optionCard} ${selectedBase === opt.id ? styles.activeCard : ''}`}
-                      >
-                        <div className={styles.optionHeader}>
-                          <h4 className={styles.optionTitle}>{opt.name}</h4>
-                          <span className={styles.optionCost}>₹{opt.price.toLocaleString('en-IN')}</span>
-                        </div>
-                        <p className={styles.optionText}>{opt.desc}</p>
-                        {opt.originalPrice && (
-                          <div style={{ fontSize: '0.75rem', color: '#16a34a', fontWeight: 600, marginTop: '4px' }}>
-                            Save ₹{(opt.originalPrice - opt.price).toLocaleString('en-IN')} (40% Off!)
+                    {BASE_MODELS.map(opt => {
+                      const Icon = opt.id === 'software' ? Settings : opt.id === 'edge-s1' ? Zap : Cpu;
+                      return (
+                        <div
+                          key={opt.id}
+                          onClick={() => setSelectedBase(opt.id)}
+                          className={`${styles.optionCard} ${selectedBase === opt.id ? styles.activeCard : ''}`}
+                        >
+                          <div className={styles.optionHeader}>
+                            <h4 className={styles.optionTitle} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                              <Icon size={18} color="#FC9700" style={{ flexShrink: 0 }} />
+                              {opt.name}
+                            </h4>
+                            <span className={styles.optionCost}>₹{opt.price.toLocaleString('en-IN')}</span>
                           </div>
-                        )}
-                      </div>
-                    ))}
+                          <p className={styles.optionText}>{opt.desc}</p>
+                          {opt.originalPrice && (
+                            <div style={{ fontSize: '0.75rem', color: '#16a34a', fontWeight: 600, marginTop: '4px' }}>
+                              Save ₹{(opt.originalPrice - opt.price).toLocaleString('en-IN')} (40% Off!)
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -180,19 +186,25 @@ export default function MDCBuildingPage() {
                   <h3 className={styles.stepTitle}>Select CPU Engine / Processor</h3>
                   <p className={styles.stepDesc}>Select the processor core architecture best matching your edge diagnostics throughput goals.</p>
                   <div className={styles.optionsGrid}>
-                    {PROCESSORS.map(opt => (
-                      <div
-                        key={opt.id}
-                        onClick={() => setSelectedCpu(opt.id)}
-                        className={`${styles.optionCard} ${selectedCpu === opt.id ? styles.activeCard : ''}`}
-                      >
-                        <div className={styles.optionHeader}>
-                          <h4 className={styles.optionTitle}>{opt.name}</h4>
-                          <span className={styles.optionCost}>{opt.price === 0 ? 'Included' : `+₹${opt.price.toLocaleString('en-IN')}`}</span>
+                    {PROCESSORS.map(opt => {
+                      const Icon = opt.id === 'arm64' ? Cpu : opt.id === 'x86_64' ? Settings : Zap;
+                      return (
+                        <div
+                          key={opt.id}
+                          onClick={() => setSelectedCpu(opt.id)}
+                          className={`${styles.optionCard} ${selectedCpu === opt.id ? styles.activeCard : ''}`}
+                        >
+                          <div className={styles.optionHeader}>
+                            <h4 className={styles.optionTitle} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                              <Icon size={18} color="#FC9700" style={{ flexShrink: 0 }} />
+                              {opt.name}
+                            </h4>
+                            <span className={styles.optionCost}>{opt.price === 0 ? 'Included' : `+₹${opt.price.toLocaleString('en-IN')}`}</span>
+                          </div>
+                          <p className={styles.optionText}>{opt.desc}</p>
                         </div>
-                        <p className={styles.optionText}>{opt.desc}</p>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -209,7 +221,10 @@ export default function MDCBuildingPage() {
                         className={`${styles.optionCard} ${selectedStorage === opt.id ? styles.activeCard : ''}`}
                       >
                         <div className={styles.optionHeader}>
-                          <h4 className={styles.optionTitle}>{opt.name}</h4>
+                          <h4 className={styles.optionTitle} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                            <Database size={18} color="#FC9700" style={{ flexShrink: 0 }} />
+                            {opt.name}
+                          </h4>
                           <span className={styles.optionCost}>{opt.price === 0 ? 'Included' : `+₹${opt.price.toLocaleString('en-IN')}`}</span>
                         </div>
                         <p className={styles.optionText}>{opt.desc}</p>
@@ -224,19 +239,29 @@ export default function MDCBuildingPage() {
                   <h3 className={styles.stepTitle}>Select Sector Offline Content Crate</h3>
                   <p className={styles.stepDesc}>Choose sector-specific database packages preloaded offline to bootstrap local usage immediately.</p>
                   <div className={styles.optionsGrid}>
-                    {SECTOR_CRATES.map(opt => (
-                      <div
-                        key={opt.id}
-                        onClick={() => setSelectedCrate(opt.id)}
-                        className={`${styles.optionCard} ${selectedCrate === opt.id ? styles.activeCard : ''}`}
-                      >
-                        <div className={styles.optionHeader}>
-                          <h4 className={styles.optionTitle}>{opt.name}</h4>
-                          <span className={styles.optionCost}>{opt.price === 0 ? 'Included' : `+₹${opt.price.toLocaleString('en-IN')}`}</span>
+                    {SECTOR_CRATES.map(opt => {
+                      const Icon =
+                        opt.id === 'none' ? Settings :
+                        opt.id === 'crate-edu' ? BookOpen :
+                        opt.id === 'crate-health' ? HeartPulse :
+                        opt.id === 'crate-retail' ? Store : Wrench;
+                      return (
+                        <div
+                          key={opt.id}
+                          onClick={() => setSelectedCrate(opt.id)}
+                          className={`${styles.optionCard} ${selectedCrate === opt.id ? styles.activeCard : ''}`}
+                        >
+                          <div className={styles.optionHeader}>
+                            <h4 className={styles.optionTitle} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                              <Icon size={18} color="#FC9700" style={{ flexShrink: 0 }} />
+                              {opt.name}
+                            </h4>
+                            <span className={styles.optionCost}>{opt.price === 0 ? 'Included' : `+₹${opt.price.toLocaleString('en-IN')}`}</span>
+                          </div>
+                          <p className={styles.optionText}>{opt.desc}</p>
                         </div>
-                        <p className={styles.optionText}>{opt.desc}</p>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -246,19 +271,28 @@ export default function MDCBuildingPage() {
                   <h3 className={styles.stepTitle}>Add Engineering & Support Services</h3>
                   <p className={styles.stepDesc}>Opt-in to micro-kernel optimization, data loading, or custom 24/7 hardware support response layers.</p>
                   <div className={styles.optionsGrid}>
-                    {SERVICES.map(opt => (
-                      <div
-                        key={opt.id}
-                        onClick={() => setSelectedService(opt.id)}
-                        className={`${styles.optionCard} ${selectedService === opt.id ? styles.activeCard : ''}`}
-                      >
-                        <div className={styles.optionHeader}>
-                          <h4 className={styles.optionTitle}>{opt.name}</h4>
-                          <span className={styles.optionCost}>{opt.price === 0 ? 'Included' : `+₹${opt.price.toLocaleString('en-IN')}`}</span>
+                    {SERVICES.map(opt => {
+                      const Icon =
+                        opt.id === 'none' ? Settings :
+                        opt.id === 'service-seed' ? Database :
+                        opt.id === 'service-sla' ? Shield : Wrench;
+                      return (
+                        <div
+                          key={opt.id}
+                          onClick={() => setSelectedService(opt.id)}
+                          className={`${styles.optionCard} ${selectedService === opt.id ? styles.activeCard : ''}`}
+                        >
+                          <div className={styles.optionHeader}>
+                            <h4 className={styles.optionTitle} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                              <Icon size={18} color="#FC9700" style={{ flexShrink: 0 }} />
+                              {opt.name}
+                            </h4>
+                            <span className={styles.optionCost}>{opt.price === 0 ? 'Included' : `+₹${opt.price.toLocaleString('en-IN')}`}</span>
+                          </div>
+                          <p className={styles.optionText}>{opt.desc}</p>
                         </div>
-                        <p className={styles.optionText}>{opt.desc}</p>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -270,6 +304,9 @@ export default function MDCBuildingPage() {
                   <div className={styles.optionsGrid}>
                     {UPGRADES.map(opt => {
                       const isSelected = selectedUpgrades.includes(opt.id);
+                      const Icon =
+                        opt.id === 'up-ip67' ? Shield :
+                        opt.id === 'up-battery' ? Battery : Shield;
                       return (
                         <div
                           key={opt.id}
@@ -277,10 +314,11 @@ export default function MDCBuildingPage() {
                           className={`${styles.optionCard} ${isSelected ? styles.activeCard : ''}`}
                         >
                           <div className={styles.optionHeader}>
-                            <h4 className={styles.optionTitle}>
-                              <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 20, height: 20, border: '2px solid #FC9700', borderRadius: '4px', marginRight: 10, verticalAlign: 'middle', background: isSelected ? '#FC9700' : 'transparent' }}>
+                            <h4 className={styles.optionTitle} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                              <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 20, height: 20, border: '2px solid #FC9700', borderRadius: '4px', flexShrink: 0, background: isSelected ? '#FC9700' : 'transparent' }}>
                                 {isSelected && <Check size={14} color="#fff" />}
                               </span>
+                              <Icon size={18} color="#FC9700" style={{ flexShrink: 0 }} />
                               {opt.name}
                             </h4>
                             <span className={styles.optionCost}>+₹{opt.price.toLocaleString('en-IN')}</span>
@@ -327,6 +365,75 @@ export default function MDCBuildingPage() {
           {/* Right Column: Floating Console Summary */}
           <div className={styles.sidebarSummary}>
             <div className={styles.consoleCard}>
+              {/* CSS 3D Model Visualizer */}
+              <div className={styles.modelViewport}>
+                <div className={styles.modelStage}>
+                  {/* Base Chassis Box */}
+                  <div className={`${styles.cube} ${
+                    selectedBase === 'software' ? styles.cubeSoftware :
+                    selectedBase === 'edge-s1' ? styles.cubeEdgeS1 : styles.cubeEdgeX5
+                  }`}>
+                    {/* Front Face with LED Light & Text */}
+                    <div className={`${styles.face} ${styles.faceFront}`}>
+                      <div className={`${styles.ledLight} ${
+                        selectedBase !== 'software' ? styles.ledLightActive : ''
+                      }`} />
+                      <span style={{ fontSize: selectedBase === 'software' ? '7px' : '9px', color: '#FC9700', fontWeight: 'bold', letterSpacing: '0.05em' }}>
+                        {selectedBase === 'software' ? 'CORE v1.0' :
+                         selectedBase === 'edge-s1' ? 'EDGE S1' : 'EDGE X5'}
+                      </span>
+                    </div>
+                    {/* Other 3D Cube Faces */}
+                    <div className={`${styles.face} ${styles.faceBack}`} />
+                    <div className={`${styles.face} ${styles.faceLeft}`} />
+                    <div className={`${styles.face} ${styles.faceRight}`} />
+                    <div className={`${styles.face} ${styles.faceTop}`}>
+                      {/* CPU chip light on top */}
+                      {selectedCpu === 'fpga' ? (
+                        <div className={`${styles.procCoreLight} ${styles.procFpgaLight}`} />
+                      ) : selectedCpu === 'x86_64' ? (
+                        <div className={styles.chipGrid}>
+                          <span /><span /><span />
+                          <span /><span /><span />
+                          <span /><span /><span />
+                        </div>
+                      ) : (
+                        <div className={styles.procCoreLight} />
+                      )}
+                    </div>
+                    <div className={`${styles.face} ${styles.faceBottom}`} />
+                  </div>
+
+                  {/* Battery Expansion Attachment (renders under Edge chassis if selected) */}
+                  {selectedUpgrades.includes('up-battery') && selectedBase !== 'software' && (
+                    <div className={`${styles.batteryUpgrade} ${
+                      selectedBase === 'edge-s1' ? styles.batS1 : styles.batX5
+                    }`}>
+                      <div className={`${styles.batteryFace} ${styles.batteryFaceFront}`} />
+                      <div className={`${styles.batteryFace} ${styles.batteryFaceBack}`} />
+                      <div className={`${styles.batteryFace} ${styles.batteryFaceLeft}`} />
+                      <div className={`${styles.batteryFace} ${styles.batteryFaceRight}`} />
+                      <div className={`${styles.batteryFace} ${styles.batteryFaceTop}`} />
+                      <div className={`${styles.batteryFace} ${styles.batteryFaceBottom}`} />
+                    </div>
+                  )}
+
+                  {/* IP67 Outer Shield Casing (renders surrounding Edge S1 / X5 if selected) */}
+                  {selectedUpgrades.includes('up-ip67') && selectedBase !== 'software' && (
+                    <div className={`${styles.caseUpgrade} ${
+                      selectedBase === 'edge-s1' ? styles.caseS1 : styles.caseX5
+                    }`}>
+                      <div className={`${styles.caseFace} ${styles.caseFaceFront}`} />
+                      <div className={`${styles.caseFace} ${styles.caseFaceBack}`} />
+                      <div className={`${styles.caseFace} ${styles.caseFaceLeft}`} />
+                      <div className={`${styles.caseFace} ${styles.caseFaceRight}`} />
+                      <div className={`${styles.caseFace} ${styles.caseFaceTop}`} />
+                      <div className={`${styles.caseFace} ${styles.caseFaceBottom}`} />
+                    </div>
+                  )}
+                </div>
+              </div>
+
               <div className={styles.consoleHeader}>
                 <div className={styles.statusWrapper}>
                   <div className={styles.statusDot} />

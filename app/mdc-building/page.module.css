@@ -27,6 +27,7 @@
 .stepsNav {
   display: flex;
   overflow-x: auto;
+  overflow-y: hidden;
   gap: var(--space-3);
   margin-bottom: var(--space-6);
   padding-bottom: var(--space-2);
@@ -316,3 +317,253 @@
   text-decoration: none;
   margin-top: var(--space-2);
 }
+
+/* 3D Model Viewport */
+.modelViewport {
+  width: 100%;
+  height: 220px;
+  background: radial-gradient(circle at center, #1a2230 0%, #0b0e14 100%);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 900px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.modelStage {
+  width: 200px;
+  height: 120px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rotateStage 14s infinite linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes rotateStage {
+  0% { transform: rotateX(-22deg) rotateY(0deg); }
+  100% { transform: rotateX(-22deg) rotateY(360deg); }
+}
+
+/* 3D Cube Faces */
+.cube {
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease;
+}
+
+.face {
+  position: absolute;
+  border: 1.5px solid rgba(252, 151, 0, 0.35);
+  background: rgba(20, 24, 33, 0.95);
+  box-shadow: inset 0 0 20px rgba(252, 151, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: visible;
+}
+
+/* Base Dimensions */
+/* Software chip style */
+.cubeSoftware {
+  width: 90px;
+  height: 10px;
+}
+.cubeSoftware .faceFront, .cubeSoftware .faceBack { width: 90px; height: 10px; }
+.cubeSoftware .faceLeft, .cubeSoftware .faceRight { width: 40px; height: 10px; }
+.cubeSoftware .faceTop, .cubeSoftware .faceBottom { width: 90px; height: 40px; }
+
+.cubeSoftware .faceFront  { transform: rotateY(  0deg) translateZ(20px); }
+.cubeSoftware .faceBack   { transform: rotateY(180deg) translateZ(20px); }
+.cubeSoftware .faceRight  { transform: rotateY( 90deg) translateZ(45px); }
+.cubeSoftware .faceLeft   { transform: rotateY(-90deg) translateZ(45px); }
+.cubeSoftware .faceTop    { transform: rotateX( 90deg) translateZ(5px); }
+.cubeSoftware .faceBottom { transform: rotateX(-90deg) translateZ(5px); }
+
+/* Rugged mini S1 style */
+.cubeEdgeS1 {
+  width: 100px;
+  height: 50px;
+}
+.cubeEdgeS1 .faceFront, .cubeEdgeS1 .faceBack { width: 100px; height: 50px; }
+.cubeEdgeS1 .faceLeft, .cubeEdgeS1 .faceRight { width: 70px; height: 50px; }
+.cubeEdgeS1 .faceTop, .cubeEdgeS1 .faceBottom { width: 100px; height: 70px; }
+
+.cubeEdgeS1 .faceFront  { transform: rotateY(  0deg) translateZ(35px); }
+.cubeEdgeS1 .faceBack   { transform: rotateY(180deg) translateZ(35px); }
+.cubeEdgeS1 .faceRight  { transform: rotateY( 90deg) translateZ(50px); }
+.cubeEdgeS1 .faceLeft   { transform: rotateY(-90deg) translateZ(50px); }
+.cubeEdgeS1 .faceTop    { transform: rotateX( 90deg) translateZ(25px); }
+.cubeEdgeS1 .faceBottom { transform: rotateX(-90deg) translateZ(25px); }
+
+/* Enterprise rack X5 style */
+.cubeEdgeX5 {
+  width: 150px;
+  height: 40px;
+}
+.cubeEdgeX5 .faceFront, .cubeEdgeX5 .faceBack { width: 150px; height: 40px; }
+.cubeEdgeX5 .faceLeft, .cubeEdgeX5 .faceRight { width: 80px; height: 40px; }
+.cubeEdgeX5 .faceTop, .cubeEdgeX5 .faceBottom { width: 150px; height: 80px; }
+
+.cubeEdgeX5 .faceFront  { transform: rotateY(  0deg) translateZ(40px); }
+.cubeEdgeX5 .faceBack   { transform: rotateY(180deg) translateZ(40px); }
+.cubeEdgeX5 .faceRight  { transform: rotateY( 90deg) translateZ(75px); }
+.cubeEdgeX5 .faceLeft   { transform: rotateY(-90deg) translateZ(75px); }
+.cubeEdgeX5 .faceTop    { transform: rotateX( 90deg) translateZ(20px); }
+.cubeEdgeX5 .faceBottom { transform: rotateX(-90deg) translateZ(20px); }
+
+/* Face branding & style variants */
+.faceFront {
+  border-color: #FC9700;
+  background: linear-gradient(135deg, #1f2838 0%, #0d1117 100%);
+}
+
+.faceTop {
+  background: radial-gradient(circle, rgba(252, 189, 0, 0.12) 0%, #131720 80%);
+}
+
+/* LED Indicator Light */
+.ledLight {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #16a34a;
+  box-shadow: 0 0 8px #16a34a;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.ledLightActive {
+  background: #FC9700;
+  box-shadow: 0 0 10px #FC9700;
+  animation: ledPulse 1.2s infinite alternate;
+}
+
+@keyframes ledPulse {
+  0% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+/* Upgrade Modules */
+/* IP67 Outer Case */
+.caseUpgrade {
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+.caseFace {
+  position: absolute;
+  border: 1.5px solid rgba(252, 189, 0, 0.45);
+  background: rgba(252, 189, 0, 0.14);
+  backdrop-filter: blur(1.5px);
+  backface-visibility: visible;
+  box-shadow: 0 0 15px rgba(252, 189, 0, 0.12);
+}
+
+.caseS1 { width: 116px; height: 66px; }
+.caseS1 .caseFaceFront, .caseS1 .caseFaceBack { width: 116px; height: 66px; }
+.caseS1 .caseFaceLeft, .caseS1 .caseFaceRight { width: 86px; height: 66px; }
+.caseS1 .caseFaceTop, .caseS1 .caseFaceBottom { width: 116px; height: 86px; }
+
+.caseS1 .caseFaceFront  { transform: rotateY(  0deg) translateZ(43px); }
+.caseS1 .caseFaceBack   { transform: rotateY(180deg) translateZ(43px); }
+.caseS1 .caseFaceRight  { transform: rotateY( 90deg) translateZ(58px); }
+.caseS1 .caseFaceLeft   { transform: rotateY(-90deg) translateZ(58px); }
+.caseS1 .caseFaceTop    { transform: rotateX( 90deg) translateZ(33px); }
+.caseS1 .caseFaceBottom { transform: rotateX(-90deg) translateZ(33px); }
+
+.caseX5 { width: 166px; height: 56px; }
+.caseX5 .caseFaceFront, .caseX5 .caseFaceBack { width: 166px; height: 56px; }
+.caseX5 .caseFaceLeft, .caseX5 .caseFaceRight { width: 96px; height: 56px; }
+.caseX5 .caseFaceTop, .caseX5 .caseFaceBottom { width: 166px; height: 96px; }
+
+.caseX5 .caseFaceFront  { transform: rotateY(  0deg) translateZ(48px); }
+.caseX5 .caseFaceBack   { transform: rotateY(180deg) translateZ(48px); }
+.caseX5 .caseFaceRight  { transform: rotateY( 90deg) translateZ(83px); }
+.caseX5 .caseFaceLeft   { transform: rotateY(-90deg) translateZ(83px); }
+.caseX5 .caseFaceTop    { transform: rotateX( 90deg) translateZ(28px); }
+.caseX5 .caseFaceBottom { transform: rotateX(-90deg) translateZ(28px); }
+
+/* Battery Pack (Bottom Attachment) */
+.batteryUpgrade {
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+.batteryFace {
+  position: absolute;
+  border: 1px solid rgba(22, 163, 74, 0.4);
+  background: rgba(14, 24, 18, 0.95);
+  box-shadow: inset 0 0 10px rgba(22, 163, 74, 0.15);
+}
+
+.batS1 { width: 100px; height: 16px; transform: translateY(33px); }
+.batS1 .batteryFaceFront, .batS1 .batteryFaceBack { width: 100px; height: 16px; }
+.batS1 .batteryFaceLeft, .batS1 .batteryFaceRight { width: 70px; height: 16px; }
+.batS1 .batteryFaceTop, .batS1 .batteryFaceBottom { width: 100px; height: 70px; }
+
+.batS1 .batteryFaceFront  { transform: rotateY(  0deg) translateZ(35px); }
+.batS1 .batteryFaceBack   { transform: rotateY(180deg) translateZ(35px); }
+.batS1 .batteryFaceRight  { transform: rotateY( 90deg) translateZ(50px); }
+.batS1 .batteryFaceLeft   { transform: rotateY(-90deg) translateZ(50px); }
+.batS1 .batteryFaceTop    { transform: rotateX( 90deg) translateZ(8px); }
+.batS1 .batteryFaceBottom { transform: rotateX(-90deg) translateZ(8px); }
+
+.batX5 { width: 150px; height: 16px; transform: translateY(28px); }
+.batX5 .batteryFaceFront, .batX5 .batteryFaceBack { width: 150px; height: 16px; }
+.batX5 .batteryFaceLeft, .batX5 .batteryFaceRight { width: 80px; height: 16px; }
+.batX5 .batteryFaceTop, .batX5 .batteryFaceBottom { width: 150px; height: 80px; }
+
+.batX5 .batteryFaceFront  { transform: rotateY(  0deg) translateZ(40px); }
+.batX5 .batteryFaceBack   { transform: rotateY(180deg) translateZ(40px); }
+.batX5 .batteryFaceRight  { transform: rotateY( 90deg) translateZ(75px); }
+.batX5 .batteryFaceLeft   { transform: rotateY(-90deg) translateZ(75px); }
+.batX5 .batteryFaceTop    { transform: rotateX( 90deg) translateZ(8px); }
+.batX5 .batteryFaceBottom { transform: rotateX(-90deg) translateZ(8px); }
+
+/* Processor Accent light (Top face decoration) */
+.procCoreLight {
+  width: 14px;
+  height: 14px;
+  background: #FC9700;
+  box-shadow: 0 0 12px #FC9700;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.procFpgaLight {
+  background: #00d2ff;
+  box-shadow: 0 0 15px #00d2ff;
+  animation: cycleLight 2s infinite ease-in-out;
+}
+
+@keyframes cycleLight {
+  0%, 100% { opacity: 0.5; filter: hue-rotate(0deg); }
+  50% { opacity: 1; filter: hue-rotate(180deg); }
+}
+
+.chipGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 3px;
+}
+
+.chipGrid span {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 1px;
+}
+
