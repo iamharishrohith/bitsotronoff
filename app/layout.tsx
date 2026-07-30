@@ -31,6 +31,35 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'BITSOTRON',
+              url: 'https://bitsotron.com',
+              logo: 'https://bitsotron.com/logo.png',
+              description: 'Plug-and-play local Wi‑Fi access hubs for offline videos, documents, forms, catalogs, dashboards, and training content.',
+              email: 'iamharishrohith@gmail.com',
+              telephone: '+91-89034-16887',
+              founder: {
+                '@type': 'Person',
+                name: 'Thamizharasan N',
+                jobTitle: 'Founder & CEO',
+              },
+              employee: [
+                {
+                  '@type': 'Person',
+                  name: 'Harish Rohith S',
+                  jobTitle: 'Tech Lead',
+                }
+              ]
+            }),
+          }}
+        />
+      </head>
       <body>
         <Navbar />
         <main style={{ minHeight: 'calc(100vh - 72px - 400px)' }}>
