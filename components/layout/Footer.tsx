@@ -57,6 +57,7 @@ export const Footer: React.FC = () => {
                 <li><Link href="/products">BITSOTRON Core</Link></li>
                 <li><Link href="/products">BITSOTRON Edge</Link></li>
                 <li><Link href="/products">BITSOTRON Shield</Link></li>
+                <li><Link href="/mdc-building" style={{ color: '#FCBD00', fontWeight: 'bold' }}>MDC Building</Link></li>
                 <li><Link href="/technology">Architecture</Link></li>
               </ul>
             </div>

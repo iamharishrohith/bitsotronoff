@@ -12,6 +12,7 @@ import styles from './Navbar.module.css';
 const NAV_LINKS = [
   { label: 'About', href: '/about' },
   { label: 'Products', href: '/products' },
+  { label: 'MDC Building', href: '/mdc-building' },
   { label: 'Technology', href: '/technology' },
   { label: 'Support', href: '/support' },
   { label: 'Contact', href: '/contact' },
@@ -75,9 +76,9 @@ export const Navbar: React.FC = () => {
 
         {/* Desktop CTA */}
         <div className={styles.desktopCta}>
-          <Link href="/contact">
+          <Link href="/mdc-building">
             <Button variant="primary" size="sm" icon={<ArrowRight size={16} />}>
-              Get Started
+              Build MDC
             </Button>
           </Link>
         </div>
@@ -120,9 +121,9 @@ export const Navbar: React.FC = () => {
               </nav>
 
               <div className={styles.mobileCtaWrapper}>
-                <Link href="/contact" style={{ width: '100%' }}>
+                <Link href="/mdc-building" style={{ width: '100%' }}>
                   <Button variant="primary" size="md" style={{ width: '100%' }}>
-                    Get Started
+                    Build MDC
                   </Button>
                 </Link>
               </div>

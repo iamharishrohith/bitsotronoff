@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import { getProducts } from '@/lib/keystatic';
 import { ProductComparisonTable } from '@/components/sections/ProductComparisonTable';
-import { HardwareConfigurator } from '@/components/sections/HardwareConfigurator';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { ArrowRight, Cpu, Zap, ShieldCheck, CheckCircle2 } from 'lucide-react';
@@ -102,17 +101,19 @@ export default async function ProductsPage() {
         </div>
       </section>
 
-      {/* Interactive Hardware Configurator Section */}
-      <section className="section section-surface">
-        <div className="container" style={{ maxWidth: '1100px' }}>
-          <div className="text-center" style={{ marginBottom: '3rem' }}>
-            <span className="badge">PRODUCT BUILDER</span>
-            <h2 style={{ marginTop: '0.75rem' }}>BITSOTRON Pricing Catalog</h2>
-            <p style={{ maxWidth: '640px', margin: '0.5rem auto 0' }}>
-              Indicative ex-works pricing catalogue for platform bases, custom edge processing, storage variants, and modules.
-            </p>
-          </div>
-          <HardwareConfigurator />
+      {/* MDC Custom Building Callout */}
+      <section className="section section-surface text-center">
+        <div className="container" style={{ maxWidth: '800px' }}>
+          <span className="badge">INTERACTIVE CUSTOMIZATION</span>
+          <h2 style={{ marginTop: '0.75rem', marginBottom: '1rem' }}>Build Your Custom MDC Unit</h2>
+          <p style={{ margin: '0 auto 2rem', fontSize: '1.05rem', color: 'var(--color-muted)', lineHeight: 1.6 }}>
+            Use our interactive PC-style builder tool to customize your BITSOTRON micro-compute system. Choose your frame, process engines, local storage sizes, sector-specific offline crates, and support services to generate specifications and lock in up to <strong>40% pre-book discounts</strong>.
+          </p>
+          <Link href="/mdc-building">
+            <Button variant="primary" size="lg" icon={<ArrowRight size={18} />}>
+              Open Interactive MDC Builder
+            </Button>
+          </Link>
         </div>
       </section>
 
