@@ -1,8 +1,7 @@
 import React from 'react';
 import { SupportFaq } from '@/components/sections/SupportFaq';
 import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
-import { FileText, Download, ShieldAlert, LifeBuoy, ArrowRight } from 'lucide-react';
+import { FileText, Download, ShieldAlert, LifeBuoy } from 'lucide-react';
 
 export default function SupportPage() {
   return (
@@ -32,12 +31,9 @@ export default function SupportPage() {
                 <FileText size={24} color="#FC9700" />
               </div>
               <h3>Developer Documentation</h3>
-              <p style={{ marginTop: '0.5rem', marginBottom: '1rem' }}>
+              <p style={{ marginTop: '0.5rem', color: 'var(--color-muted)', fontSize: '0.95rem', lineHeight: 1.6 }}>
                 Comprehensive API references, Rust crate definitions, and ROS2 telemetry driver guides.
               </p>
-              <a href="#faq" style={{ fontWeight: 600, color: '#FC9700', fontSize: '0.9rem', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                Browse Docs <ArrowRight size={14} />
-              </a>
             </Card>
 
             <Card variant="default">
@@ -45,12 +41,9 @@ export default function SupportPage() {
                 <Download size={24} color="#FC9700" />
               </div>
               <h3>Software Downloads</h3>
-              <p style={{ marginTop: '0.5rem', marginBottom: '1rem' }}>
+              <p style={{ marginTop: '0.5rem', color: 'var(--color-muted)', fontSize: '0.95rem', lineHeight: 1.6 }}>
                 Download BITSOTRON v3.0 Toolchain binaries for x86_64 and ARM64 platforms.
               </p>
-              <a href="#downloads" style={{ fontWeight: 600, color: '#FC9700', fontSize: '0.9rem', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                Download Binaries <ArrowRight size={14} />
-              </a>
             </Card>
 
             <Card variant="default">
@@ -58,12 +51,9 @@ export default function SupportPage() {
                 <ShieldAlert size={24} color="#FC9700" />
               </div>
               <h3>Hardware Warranty & RMA</h3>
-              <p style={{ marginTop: '0.5rem', marginBottom: '1rem' }}>
+              <p style={{ marginTop: '0.5rem', color: 'var(--color-muted)', fontSize: '0.95rem', lineHeight: 1.6 }}>
                 3-Year advance hardware replacement guarantee for all enterprise BITSOTRON Edge units.
               </p>
-              <a href="#ticket" style={{ fontWeight: 600, color: '#FC9700', fontSize: '0.9rem', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                Request RMA <ArrowRight size={14} />
-              </a>
             </Card>
           </div>
         </div>
