@@ -1,141 +1,304 @@
-# BITSOTRON Website Portfolio Project
+<div align="center">
 
-A modern, responsive startup website for **BITSOTRON**, an offline-first digital access platform designed to deliver videos, documents, forms, catalogs, dashboards, and training resources through a local Wi-Fi hub without public internet dependency.
+# BITSOTRON
 
-This project was built as a polished product website and portfolio case study using **Next.js 14**, **TypeScript**, **React**, **CSS Modules**, **Motion**, and **Keystatic CMS**.
+### Offline-First Digital Access Infrastructure
 
----
+An enterprise-grade product website for a local Wi-Fi based mini data center platform that delivers digital content without public internet dependency.
 
-## Project Summary
+<br />
 
-BITSOTRON solves a practical connectivity problem: many organizations still need to share digital content in places where internet access is unstable, costly, or unavailable.
+![Next.js](https://img.shields.io/badge/Next.js-14-262626?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-Strict-262626?style=for-the-badge&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/React-18-262626?style=for-the-badge&logo=react&logoColor=white)
+![Keystatic](https://img.shields.io/badge/CMS-Keystatic-FC9700?style=for-the-badge)
+![Motion](https://img.shields.io/badge/Motion-UI-FCBD00?style=for-the-badge)
 
-The website communicates this product clearly through:
-
-- A premium landing page experience
-- Product-focused storytelling
-- Offline-first technology positioning
-- Interactive architecture sections
-- Contact, support, and newsletter workflows
-- CMS-editable content for long-term maintainability
+</div>
 
 ---
 
-## Live Preview
+## Project Identity
 
-Local development URL:
+**BITSOTRON** is positioned as a plug-and-play offline digital access system for environments where internet connectivity is unreliable, costly, restricted, or unavailable.
 
-```text
-http://localhost:3000
-```
+The website presents BITSOTRON as a serious infrastructure product for:
 
-If another port is used:
+- Education and training centers
+- Healthcare camps and field programs
+- Rural digital access initiatives
+- Events and exhibitions
+- Retail and product catalog delivery
+- Agriculture and field operations
+- Industrial teams and internal training
 
-```text
-http://localhost:3001
-```
-
----
-
-## Key Features
-
-- **Modern homepage:** professional hero section, product messaging, material cards, and CTA flow
-- **Responsive design:** optimized layouts for desktop, tablet, and mobile
-- **Brand system:** dark grey `#262626` with yellow gradient `#FC9700 → #FCBD00`
-- **Interactive UI:** motion-enhanced sections using `motion/react`
-- **CMS-ready content:** Keystatic file-based content management
-- **Product pages:** dynamic product listing and product detail routes
-- **Support workflows:** contact form, newsletter form, and ticket API route
-- **Security basics:** secure headers, Zod validation, DOMPurify sanitization, and rate limiting
-- **Accessibility improvements:** semantic layout, keyboard focus styles, reduced-motion support
+The goal of the project is not just to look modern. It is to communicate trust, clarity, and product readiness for a technical startup.
 
 ---
 
-## Tech Stack
+## Portfolio Objective
 
-| Area | Technology |
+This project was designed and engineered as a polished portfolio-grade website that demonstrates:
+
+- Product strategy and positioning
+- Premium UI/UX execution
+- Modern React and Next.js architecture
+- CMS-backed content management
+- Responsive layout systems
+- Secure form handling
+- Scalable component organization
+- Professional brand consistency
+
+It combines startup landing page storytelling with production-oriented implementation.
+
+---
+
+## Product Problem
+
+Many organizations need to distribute digital content in locations where internet access is weak, expensive, blocked, or completely unavailable.
+
+Common pain points include:
+
+- Training materials that cannot load reliably
+- Event visitors struggling to access forms or catalogs
+- Rural users depending on unstable mobile networks
+- Healthcare and field teams needing local access to guides
+- Schools requiring offline video and document libraries
+- Businesses needing controlled content delivery without cloud dependency
+
+---
+
+## Product Solution
+
+BITSOTRON creates a local digital access layer.
+
+Users connect to the BITSOTRON device over local Wi-Fi and open a browser-based portal to access:
+
+- Videos
+- Documents
+- Forms
+- Product catalogs
+- Guides
+- Dashboards
+- Training content
+- Operational resources
+
+No public internet is required for the end user experience.
+
+---
+
+## Experience Design
+
+The interface is built around a professional enterprise visual system:
+
+| Design Area | Direction |
 | --- | --- |
-| Framework | Next.js 14 App Router |
+| Brand Palette | Dark Grey `#262626` with Yellow Gradient `#FC9700 → #FCBD00` |
+| Typography | Aptos, Segoe UI Variable, Segoe UI, and native system fallbacks |
+| Layout | Spacious, section-led, conversion-focused |
+| Motion | Subtle UI feedback and controlled product storytelling |
+| Surfaces | Clean cards, soft depth, glass-inspired panels |
+| UX Priority | Fast comprehension, clear CTAs, mobile usability |
+
+The visual direction avoids noisy gradients, decorative overload, and unprofessional display typography. The final result is restrained, sharp, and presentation-ready.
+
+---
+
+## System Architecture
+
+```mermaid
+flowchart TD
+    A["Visitor"] --> B["Next.js App Router"]
+    B --> C["Reusable React Components"]
+    B --> D["Static + Dynamic Routes"]
+    D --> E["Products"]
+    D --> F["Technology"]
+    D --> G["Support"]
+    D --> H["Contact"]
+    C --> I["CSS Modules"]
+    C --> J["Motion Animations"]
+    B --> K["Keystatic CMS"]
+    K --> L["File-Based Content"]
+    B --> M["API Routes"]
+    M --> N["Zod Validation"]
+    M --> O["DOMPurify Sanitization"]
+    M --> P["Rate Limiting"]
+```
+
+---
+
+## Core Features
+
+### Product Website
+
+- High-impact homepage with product positioning
+- Clear product and technology pages
+- Responsive navigation
+- Professional call-to-action flow
+- Offline-first messaging
+- Removed unnecessary customer route to simplify the journey
+
+### Content Management
+
+- Git-based CMS using Keystatic
+- Structured product content
+- Singleton content for key pages
+- File-based content storage
+- No external database required
+
+### Interaction Design
+
+- Motion-enhanced hero section
+- Interactive architecture storytelling
+- Hover and focus states
+- Reduced-motion support
+- Keyboard-accessible controls
+
+### Forms and APIs
+
+- Contact form API
+- Support ticket API
+- Newsletter API
+- Zod request validation
+- DOMPurify sanitization
+- Basic request rate limiting
+
+---
+
+## Technology Stack
+
+| Layer | Tools |
+| --- | --- |
+| Frontend Framework | Next.js 14 App Router |
 | Language | TypeScript |
-| UI Library | React |
-| Styling | CSS Modules + CSS Custom Properties |
+| UI Layer | React |
+| Styling | CSS Modules, CSS Custom Properties |
 | Animation | Motion |
 | CMS | Keystatic |
 | Validation | Zod |
-| Sanitization | DOMPurify |
+| Sanitization | DOMPurify, Isomorphic DOMPurify |
 | Icons | Lucide React |
-| Deployment | Vercel-ready |
+| Hosting Target | Vercel-ready |
 
 ---
 
-## Design Direction
-
-The interface follows a clean enterprise visual style:
-
-- Professional system typography using Aptos, Segoe UI, and native OS fallbacks
-- Minimal dark grey and yellow brand palette
-- Soft material surfaces and subtle depth
-- Clear section hierarchy
-- Reduced visual noise
-- Conversion-focused calls to action
-
-The `/customers` route was removed to keep the navigation focused on core product, technology, support, and contact journeys.
-
----
-
-## Pages
+## Route Structure
 
 ```text
-/                 Homepage
-/about            Company overview
-/products         Product overview
-/products/[slug]  Product detail pages
-/technology       Technology architecture
-/support          Support and ticket request
-/contact          Contact form
-/security         Trust and security
-/privacy          Privacy policy
-/terms            Terms of service
-/cookies          Cookie policy
-/keystatic        Local CMS admin
+/
+├── about
+├── products
+│   └── [slug]
+├── technology
+├── support
+├── contact
+├── security
+├── privacy
+├── terms
+├── cookies
+└── keystatic
+```
+
+The `/customers` route was intentionally removed from the active navigation and route tree to keep the site focused on product discovery, technical credibility, support, and conversion.
+
+---
+
+## Repository Structure
+
+```text
+BITSOTRON/
+├── app/
+│   ├── api/
+│   │   ├── contact/
+│   │   ├── newsletter/
+│   │   ├── ticket/
+│   │   └── keystatic/
+│   ├── about/
+│   ├── contact/
+│   ├── products/
+│   ├── security/
+│   ├── support/
+│   ├── technology/
+│   ├── layout.tsx
+│   └── page.tsx
+│
+├── components/
+│   ├── chat/
+│   ├── layout/
+│   ├── sections/
+│   └── ui/
+│
+├── content/
+│   ├── case-studies/
+│   ├── industries/
+│   ├── partners/
+│   ├── positions/
+│   ├── products/
+│   ├── singletons/
+│   ├── team/
+│   └── testimonials/
+│
+├── lib/
+│   ├── keystatic.ts
+│   ├── rate-limit.ts
+│   └── zod-schemas.ts
+│
+├── public/
+├── styles/
+│   ├── globals.css
+│   └── utilities.css
+│
+├── keystatic.config.ts
+├── next.config.js
+├── package.json
+└── tsconfig.json
 ```
 
 ---
 
-## Folder Structure
+## Selected Implementation Decisions
 
-```text
-app/
-  api/             API routes
-  products/        Product pages
-  technology/      Technology page
-  support/         Support page
-  contact/         Contact page
+### Brand Consistency
 
-components/
-  layout/          Navbar, footer, transitions
-  sections/        Hero, forms, architecture, product sections
-  ui/              Reusable Button, Card, CountUp, Marquee
+The site uses a strict visual palette:
 
-content/
-  products/        Product CMS content
-  industries/      Industry CMS content
-  case-studies/    Case study content retained for future use
-  singletons/      Homepage, about, technology content
-
-lib/
-  keystatic.ts     CMS reader helpers
-  rate-limit.ts    Request rate limiting
-  zod-schemas.ts   Validation schemas
-
-styles/
-  globals.css      Global tokens and base styles
-  utilities.css    Layout and utility classes
+```css
+--color-dark: #262626;
+--gradient-primary: linear-gradient(90deg, #FC9700 0%, #FCBD00 100%);
 ```
+
+This keeps the interface aligned with BITSOTRON’s brand assets and avoids distracting multi-color gradients.
+
+### Professional Typography
+
+The original display-heavy typography was refined into a calmer enterprise system:
+
+```css
+--font-family-base: 'Aptos', 'Segoe UI Variable', 'Segoe UI', system-ui, sans-serif;
+--font-family-display: 'Aptos Display', 'Segoe UI Variable Display', 'Aptos', system-ui, sans-serif;
+```
+
+Headings use tighter hierarchy, moderate weights, and balanced line heights for a more credible product feel.
+
+### Focused Navigation
+
+The navigation prioritizes:
+
+- About
+- Products
+- Technology
+- Support
+- Contact
+
+This reduces cognitive load and keeps the journey aligned with product discovery and conversion.
+
+### CMS-First Content
+
+Keystatic allows product and page content to be edited through a local admin interface while keeping all data inside the repository.
 
 ---
 
-## Getting Started
+## Setup
 
 ### Install Dependencies
 
@@ -143,16 +306,10 @@ styles/
 npm install
 ```
 
-### Run Development Server
+### Start Development Server
 
 ```bash
 npm run dev
-```
-
-Open:
-
-```text
-http://localhost:3000
 ```
 
 ### Build for Production
@@ -161,7 +318,7 @@ http://localhost:3000
 npm run build
 ```
 
-### Start Production Server
+### Start Production Build
 
 ```bash
 npm run start
@@ -169,21 +326,7 @@ npm run start
 
 ---
 
-## CMS Usage
-
-Keystatic admin is available locally at:
-
-```text
-http://localhost:3000/keystatic
-```
-
-Content is stored directly in the repository under `content/`, making the site easy to maintain without a separate database.
-
----
-
 ## Environment Variables
-
-Optional integrations:
 
 ```env
 RESEND_API_KEY=
@@ -193,32 +336,71 @@ ZENDESK_EMAIL=
 NEXT_PUBLIC_CRISP_WEBSITE_ID=
 ```
 
-These enable contact email delivery, support ticket forwarding, and live chat.
+| Variable | Purpose |
+| --- | --- |
+| `RESEND_API_KEY` | Enables contact form email delivery |
+| `ZENDESK_SUBDOMAIN` | Zendesk workspace subdomain |
+| `ZENDESK_API_TOKEN` | Zendesk API authentication |
+| `ZENDESK_EMAIL` | Zendesk account email |
+| `NEXT_PUBLIC_CRISP_WEBSITE_ID` | Enables Crisp live chat |
+
+---
+
+## Quality and Security
+
+Implemented baseline safeguards:
+
+- TypeScript for type safety
+- Zod schemas for API validation
+- DOMPurify for form data sanitization
+- Basic rate limiting for form endpoints
+- Security headers configured in `next.config.js`
+- Accessible focus states
+- Reduced-motion handling
+- Responsive layout behavior
+
+Recommended production hardening:
+
+- Replace in-memory rate limiting with Redis or edge-compatible storage
+- Upgrade vulnerable dependencies reported by `npm audit`
+- Add automated accessibility checks
+- Add end-to-end form tests
+- Connect production email and support services
 
 ---
 
 ## Portfolio Highlights
 
-- Built a complete startup website from structured content to production-ready UI
-- Designed a consistent brand system using reusable tokens and CSS Modules
-- Implemented dynamic content through Keystatic CMS
-- Created responsive and animated sections without overloading the interface
-- Added secure form handling with validation and sanitization
-- Refined typography and navigation for a more professional product feel
+- Designed and developed a complete startup website from concept to production-ready implementation
+- Built a scalable Next.js App Router structure with reusable components
+- Created a brand-aligned design system using CSS custom properties
+- Integrated Keystatic for maintainable Git-based content editing
+- Implemented secure, validated API workflows for user submissions
+- Refined typography, navigation, and route structure based on UI/UX review
+- Delivered a responsive interface suitable for product demos and investor-facing presentation
 
 ---
 
-## Future Improvements
+## What This Project Demonstrates
 
-- Add production-grade distributed rate limiting
-- Upgrade dependencies to resolve npm audit warnings
-- Add final brand-approved screenshots
-- Add automated accessibility testing
-- Connect contact/support forms to real production services
-- Add analytics for conversion tracking
+This project demonstrates the ability to combine:
+
+- Product thinking
+- Visual design systems
+- Frontend engineering
+- CMS architecture
+- Accessibility-aware UI
+- Security-conscious API design
+- Real-world startup positioning
+
+It is structured as a professional portfolio project that shows both design judgment and implementation depth.
 
 ---
 
-## Author
+<div align="center">
 
-Created as a portfolio-ready website project for **BITSOTRON**.
+### BITSOTRON
+
+**Offline access. Local control. Digital delivery anywhere.**
+
+</div>
