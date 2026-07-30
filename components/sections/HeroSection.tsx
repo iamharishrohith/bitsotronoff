@@ -55,24 +55,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       />
 
       <div className={`container ${styles.heroContent}`}>
-        {showPill && (
-          <motion.div
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className={styles.announcementPill}
-          >
-            <Sparkles size={14} className={styles.sparkleIcon} />
-            <span>{announcement || defaultAnnouncement}</span>
-            <button
-              onClick={() => setShowPill(false)}
-              className={styles.closePillBtn}
-              aria-label="Dismiss announcement"
-            >
-              <X size={14} />
-            </button>
-          </motion.div>
-        )}
+
 
         <motion.div
           initial={{ opacity: 0, y: 10 }}
