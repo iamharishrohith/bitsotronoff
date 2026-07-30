@@ -1,6 +1,5 @@
 import React from 'react';
 import { SupportFaq } from '@/components/sections/SupportFaq';
-import { TicketForm } from '@/components/sections/TicketForm';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { FileText, Download, ShieldAlert, LifeBuoy, ArrowRight } from 'lucide-react';
@@ -81,17 +80,19 @@ export default function SupportPage() {
         </div>
       </section>
 
-      {/* Raise a Support Ticket Form */}
+      {/* Support Escalation Info */}
       <section id="ticket" className="section section-surface">
-        <div className="container" style={{ maxWidth: '800px' }}>
-          <div className="text-center" style={{ marginBottom: '2.5rem' }}>
-            <span className="badge">PRIORITY ESCALATION</span>
-            <h2 style={{ marginTop: '0.75rem' }}>Submit a Support Ticket</h2>
-            <p style={{ marginTop: '0.5rem' }}>
-              Directly routed to Zendesk support queue. Enterprise SLAs guarantee response within 1 hour for Critical tickets.
-            </p>
+        <div className="container" style={{ maxWidth: '800px', textAlign: 'center' }}>
+          <span className="badge">PRIORITY ESCALATION</span>
+          <h2 style={{ marginTop: '0.75rem', marginBottom: '1rem' }}>Get Premium Support</h2>
+          <p style={{ marginTop: '0.5rem', marginBottom: '2rem', lineHeight: '1.7' }}>
+            We are upgrading our support queue channels. For critical issues, ticket submissions, and SLA priority escalations, please contact us directly via email.
+          </p>
+          <div style={{ display: 'inline-flex', flexDirection: 'column', gap: '0.5rem', padding: '1.5rem', background: 'var(--color-dark)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border-dark)' }}>
+            <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>🎯 Dedicated Support Line:</span>
+            <a href="mailto:support@bitsotron.com" style={{ color: '#FC9700', fontWeight: 700, fontSize: '1.15rem' }}>support@bitsotron.com</a>
+            <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.8rem', marginTop: '0.5rem' }}>Typical response within 1 hour for Enterprise SLAs</span>
           </div>
-          <TicketForm />
         </div>
       </section>
     </>

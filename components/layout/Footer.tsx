@@ -8,32 +8,6 @@ import { Button } from '@/components/ui/Button';
 import styles from './Footer.module.css';
 
 export const Footer: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-
-  const handleNewsletter = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
-    setStatus('loading');
-
-    try {
-      const res = await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-
-      if (res.ok) {
-        setStatus('success');
-        setEmail('');
-      } else {
-        setStatus('error');
-      }
-    } catch {
-      setStatus('error');
-    }
-  };
-
   return (
     <footer className={styles.footer}>
       <div className="container">
@@ -116,36 +90,16 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Newsletter Column */}
+          {/* Stay Connected Column */}
           <div className={styles.newsletterCol}>
             <h4 className={styles.colTitle}>Stay Updated</h4>
-            <p className={styles.newsletterText}>
-              Subscribe to the BITSOTRON monthly autonomous intelligence and engineering briefing.
+            <p className={styles.newsletterText} style={{ marginBottom: '1rem' }}>
+              Follow our engineering logs, research pillars, and updates on our verified developers channels.
             </p>
-
-            <form onSubmit={handleNewsletter} className={styles.newsletterForm}>
-              <div className={styles.inputGroup}>
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className={styles.emailInput}
-                />
-                <Button variant="primary" size="sm" type="submit" disabled={status === 'loading'}>
-                  {status === 'loading' ? '...' : <Send size={16} />}
-                </Button>
-              </div>
-              {status === 'success' && (
-                <p className={styles.successMsg}>
-                  <Check size={14} style={{ display: 'inline', marginRight: 4 }} /> Subscribed! Check your inbox.
-                </p>
-              )}
-              {status === 'error' && (
-                <p className={styles.errorMsg}>Error subscribing. Please try again.</p>
-              )}
-            </form>
+            <div style={{ padding: '0.85rem 1rem', background: 'var(--color-dark-surface)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(255, 255, 255, 0.05)', fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.7)' }}>
+              <strong>📧 General Announcements:</strong><br />
+              <a href="mailto:bitsotron@gmail.com" style={{ color: '#FCBD00', fontWeight: 600 }}>bitsotron@gmail.com</a>
+            </div>
           </div>
         </div>
 
