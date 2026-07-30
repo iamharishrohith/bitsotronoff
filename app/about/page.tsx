@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { getAboutPageData, getTeamMembers, getPartners } from '@/lib/keystatic';
-import { Timeline } from '@/components/sections/Timeline';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Award, Compass, Target, Heart, Linkedin, ArrowRight } from 'lucide-react';
@@ -66,14 +65,16 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Journey Timeline */}
+      {/* Startup Journey */}
       <section className="section">
-        <div className="container">
-          <div className="text-center" style={{ marginBottom: '3rem' }}>
-            <span className="badge">COMPANY MILESTONES</span>
-            <h2 style={{ marginTop: '0.75rem' }}>Our Journey & Achievements</h2>
+        <div className="container" style={{ maxWidth: '800px', textAlign: 'center' }}>
+          <div style={{ padding: '2.5rem', background: 'var(--color-surface)', borderRadius: 'var(--radius-2xl)', border: '1px solid var(--color-border)', boxShadow: 'var(--shadow-sm)' }}>
+            <span className="badge" style={{ marginBottom: '1rem' }}>OUR STATUS</span>
+            <h2 style={{ marginBottom: '1rem' }}>We are a Startup</h2>
+            <p style={{ fontSize: '1.15rem', color: 'var(--color-muted)', lineHeight: '1.7', margin: '0 auto', maxWidth: '640px' }}>
+              BITSOTRON is an agile, early-stage systems and hardware startup. We are focused on engineering the next generation of offline-first digital infrastructure and autonomous micro-kernel solutions for edge physical environments.
+            </p>
           </div>
-          <Timeline />
         </div>
       </section>
 
